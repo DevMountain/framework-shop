@@ -1,0 +1,16 @@
+.shop {
+	padding: 24px;
+}
+
+.shop__header {
+	margin: 0 0 25px 25px;
+}
+
+.shop__products-wrapper {
+	align-items: center;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	width: 100%;
+}
+

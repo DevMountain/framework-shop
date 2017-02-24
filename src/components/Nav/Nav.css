@@ -1,0 +1,30 @@
+.nav {
+	align-items: center;
+	background-color: #303e4c;
+	box-sizing: border-box;
+	color: #ffffff;
+	display: flex;
+	height: 75px;
+	justify-content: space-between;
+	padding: 15px;
+}
+
+.nav__header-wrapper {
+	align-items: center;
+	display: flex;
+}
+
+.nav a, .nav a:visited {
+	color: #ffffff;
+	text-decoration: none;
+}
+
+.nav__header {
+	margin: 0;
+}
+
+.nav__javascript-logo {
+	height: 40px;
+	margin-right: 12px;
+	width: auto;
+}

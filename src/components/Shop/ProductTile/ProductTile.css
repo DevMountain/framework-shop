@@ -1,0 +1,42 @@
+.product-tile {
+	align-items: center;
+	border: 1px solid #959595;
+	display: flex;
+	height: 80px;
+	justify-content: space-between;
+	margin: 0 20px 20px 0;
+	min-width: 270px;
+	padding: 10px;
+}
+
+.product-tile__info {
+	flex: 1;
+}
+
+.product-tile__info h3 {
+	font-weight: 300;
+	margin: 0 0 15px 0;
+}
+
+.product-tile__buy {
+	border: 1px solid transparent;
+	background-color: #5c8dff;
+	color: white;
+	cursor: pointer;
+	font-family: sans-serif;
+	font-size: 14px;
+	font-weight: 300;
+	height: 30px;
+	width: 65px;
+}
+
+.product-tile__logo-wrapper {
+	border-left: 1px solid #e8e8e8;
+	flex: 1;
+	text-align: center;
+}
+
+.product-tile__logo {
+	height: 45px;
+	width: 45px;
+}

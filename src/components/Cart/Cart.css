@@ -1,0 +1,13 @@
+.cart {
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+.cart__total {
+	height: 40px;
+	padding: 10px 0;
+	text-align: right;
+	width: 300px;
+}
