@@ -1,4 +1,5 @@
 import React, { PropTypes } from "react";
+import { Link } from "react-router";
 
 import "./FeaturedProduct.css";
 
@@ -11,7 +12,7 @@ export default function FeaturedProduct( { addToCart, description, logo, name, o
 					className="featured-product__logo"
 					src={ logo }
 				/>
-				<h3 className="featured-product__name">{ name }</h3>
+				<Link to={ `details/${ name }`}><h3 className="featured-product__name">{ name }</h3></Link>
 			</div>
 			<p className="featured-product__description">{ description }</p>
 			<div className="featured-product__buy-wrapper">
