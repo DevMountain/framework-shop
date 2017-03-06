@@ -9,9 +9,7 @@ export function Cart( { productsInCart } ) {
 	const products = productsInCart.map( product => (
 		<CartItem
 			key={ product.id }
-			logo={ product.logo }
-			name={ product.name }
-			price={ product.price }
+			{ ...product }
 		/>
 	) );
 	const cartTotal = productsInCart.reduce( ( total, { price } ) => total + price, 0 );
