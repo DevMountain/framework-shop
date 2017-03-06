@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router";
 
@@ -8,28 +8,27 @@ import { addToCart } from "../../ducks/product";
 
 import FeaturedProduct from "./FeaturedProduct/FeaturedProduct";
 
-export class Landing extends Component {
-	render() {
-		const products = this.props.featuredProducts.map( product => (
-			<FeaturedProduct
-				key={ product.id }
-				addToCart={ () => this.props.addToCart( product.id ) }
-				{ ...product }
-			/>
-		) );
-		return (
-			<main className="landing">
-				<h1>Featured Products</h1>
-				<div className="landing__products-wrapper">
-					{ products }
-				</div>
+export function Landing( { addToCart, featuredProducts } ) {
+	const products = featuredProducts.map( product => (
+		<FeaturedProduct
+			key={ product.id }
+			addToCart={ () => addToCart( product.id ) }
+			{ ...product }
+		/>
+	) );
 
-				<Link to="shop">
-					<h1 className="landing__full-shop-link">Take me to the full shop!</h1>
-				</Link>
-			</main>
-		);
-	}
+	return (
+		<main className="landing">
+			<h1>Featured Products</h1>
+			<div className="landing__products-wrapper">
+				{ products }
+			</div>
+
+			<Link to="shop">
+				<h1 className="landing__full-shop-link">Take me to the full shop!</h1>
+			</Link>
+		</main>
+	);
 }
 
 function mapStateToProps( { products } ) {
