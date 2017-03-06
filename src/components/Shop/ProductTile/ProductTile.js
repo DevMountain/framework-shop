@@ -7,19 +7,19 @@ export default function ProductTile( { addToCart, logo, name, price } ) {
 	return (
 		<div className="product-tile">
 			<section className="product-tile__info">
-				<Link to={ `details/${ name }` }><h3>{ name }</h3></Link>
+				<h3>{ /* Display the product name */ }</h3>
 				<button
 					className="product-tile__buy"
 					onClick={ addToCart }
 				>
-					${ price }
+					${ /* Display the product price */ }
 				</button>
 			</section>
 			<section className="product-tile__logo-wrapper">
 				<img
 					className="product-tile__logo"
 					alt={ `${ name } logo` }
-					src={ logo }
+					src={ /* Attach the product logo */ }
 				/>
 			</section>
 		</div>

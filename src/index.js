@@ -6,11 +6,11 @@ import "./index.css";
 
 import store from "./store";
 
-import router from "./router";
+import App from "./components/App";
 
 ReactDOM.render(
 	<Provider store={ store }>
-		{ router }
+		<App />
 	</Provider>,
 	document.getElementById( 'root' )
 );

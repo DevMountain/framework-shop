@@ -8,7 +8,6 @@ export function App( { children } ) {
 	return (
 		<div className="app">
 			<Nav />
-			{ children }
 		</div>
 	);
 }

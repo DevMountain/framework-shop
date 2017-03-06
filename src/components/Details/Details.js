@@ -20,22 +20,22 @@ export function Details( { addToCart, product } ) {
 			<img
 				alt={ `${ name } logo` }
 				className="details__logo"
-				src={ logo }
+				src={ /* Attach the product logo */ }
 			/>
-			<h1 className="details__name">{ name }</h1>
-			<p className="details__description">{ description }</p>
+			<h1 className="details__name">{ /* Display the product name */ }</h1>
+			<p className="details__description">{ /* Display the product description */ }</p>
 			<button
 				className="details__buy"
 				onClick={ () => addToCart( product.id ) }
 			>
-				Buy now for ${ price }!
+				Buy now for ${ /* Display the product price */ }!
 			</button>
 		</div>
 	);
 }
 
-function mapStateToProps( { products }, ownProps ) {
-	return { product: products.filter( product => product.name === ownProps.params.name )[ 0 ] };
+function mapStateToProps( state ) {
+	return state;
 }
 
 export default connect( mapStateToProps, { addToCart } )( Details );

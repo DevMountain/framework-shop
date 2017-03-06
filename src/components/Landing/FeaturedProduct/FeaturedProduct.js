@@ -1,5 +1,4 @@
 import React, { PropTypes } from "react";
-import { Link } from "react-router";
 
 import "./FeaturedProduct.css";
 
@@ -10,18 +9,18 @@ export default function FeaturedProduct( { addToCart, description, logo, name, o
 				<img
 					alt={ `${ name } logo` }
 					className="featured-product__logo"
-					src={ logo }
+					src={ /* Attach the product logo */ }
 				/>
-				<Link to={ `details/${ name }`}><h3 className="featured-product__name">{ name }</h3></Link>
+				<h3 className="featured-product__name">{ /* Display the product name */ }</h3>
 			</div>
-			<p className="featured-product__description">{ description }</p>
+			<p className="featured-product__description">{ /* Display the product description */ }</p>
 			<div className="featured-product__buy-wrapper">
-				{ onSale ? <p className="featured-product__price-reduced">Price Reduced!</p> : null }
+				<p className="featured-product__price-reduced">Price Reduced!</p>
 				<button
 					className="featured-product__buy"
 					onClick={ addToCart }
 				>
-					${ price }
+					${ /* Display the product price */ }
 				</button>
 			</div>
 		</div>
