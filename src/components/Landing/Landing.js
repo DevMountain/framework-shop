@@ -11,9 +11,14 @@ import FeaturedProduct from "./FeaturedProduct/FeaturedProduct";
 export function Landing( { addToCart, featuredProducts } ) {
 	const products = featuredProducts.map( product => (
 		<FeaturedProduct
-			key={ product.id }
 			addToCart={ () => addToCart( product.id ) }
-			{ ...product }
+			description={ product.description }
+			key={ product.id }
+			logo={ product.logo }
+			name={ product.name }
+			onSale={ product.onSale }
+			price={ product.price }
+
 		/>
 	) );
 

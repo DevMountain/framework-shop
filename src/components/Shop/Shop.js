@@ -12,7 +12,9 @@ export function Shop( { addToCart, products } ) {
 		<ProductTile
 			addToCart={ () => addToCart( product.id ) }
 			key={ product.id }
-			{ ...product }
+			logo={ product.logo }
+			name={ product.name }
+			price={ product.price }
 		/>
 	) );
 
