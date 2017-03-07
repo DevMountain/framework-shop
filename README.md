@@ -13,6 +13,8 @@ In this project we will be building an ecommerce shop for the sale of JavaScript
 
 Several of these have child components, used to display products in different ways.
 
+Redux has also been mostly wired up to the application. Take a quick look over the reducer to get an idea of how the application data looks.
+
 ### Setup
 
 Get started with the usual steps: 
@@ -147,6 +149,26 @@ ReactDOM.render(
 
 
 </details>
+
+### Step 2
+
+**Summary**
+
+In this step we will be configuring the `App` component to render child components and displaying data through the `Landing` component.
+
+**Instructions**
+
+* Render children in `src/components/App.js`
+* Render featured products in `src/components/Landing/Landing.js`
+* Update `src/components/Landing/FeaturedProduct/FeaturedProduct.js` to display data from props
+
+**Detailed Instructions**
+
+Right now our router is rendering `App`, but nothing else. This is because `App` is the parent route over the rest of our routes, meaning that the job of displaying those routes is delegated to the `App` component. Luckily this is easy to do! Just render the `children` prop in curly braces right below `<Nav />`. If `App` were a class component this would be referenced as `this.props.children`.
+
+App is now displaying it's child route's, but you probably can't see anything yet. We need to update `src/components/Landing/Landing.js` so that it actually displays some data!
+
+
 
 ## Contributions
 
