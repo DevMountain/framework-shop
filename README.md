@@ -64,10 +64,11 @@ Now that we have an empty router, let's supply it with some routes. Place a `Rou
 
 Because this first route will be a wrapper of our other routes, we want its `path` to be `"/"`. Because this is a base path (you can't go any lower than `"/"`), this component will always be displayed. Why would we want a base component that is always displayed? Sometimes you have something you want on the screen regardless of where a user is in your application, like a header, footer, or info bar. Rather than including those components in every single view component, we can just have a single top level component display them!
 
-For the `component` prop, we'll pass `App`. The `App` component renders the `Nav` component, so we can now have that top nav bar visible on every view! Within this base route, we'll have three more routes:
+For the `component` prop, we'll pass `App`. The `App` component renders the `Nav` component, so we can now have that top nav bar visible on every view! Inside this base route, we'll have four more routes:
 
 * An `IndexRoute` with a `component` prop set equal to the `Landing` component. Because the `IndexRoute` is rendered as the default child of their parent, they don't need a `path` prop.
 * A `Route` with a `path` of `"shop"` and a `component` of `Shop`
+* A `Route` with a path of `"details/:name"` and a component of `Details`. Note that we are using a route parameter here! That means that inside of the handle component we can access the `name` parameter.
 * A `Route` with a `path` of `"cart"` and a component of `Cart`
 
 With out router configured, we can now head over to `src/index.js`. Go ahead and delete the `App` import and element, as we'll be rendering them through the router. Import `router` from `src/router.js` and display it inside of the `Provider` element like so `{ router }`.
