@@ -71,7 +71,7 @@ For the `component` prop, we'll pass `App`. The `App` component renders the `Nav
 * A `Route` with a path of `"details/:name"` and a component of `Details`. Note that we are using a route parameter here! That means that inside of the handle component we can access the `name` parameter.
 * A `Route` with a `path` of `"cart"` and a component of `Cart`
 
-With out router configured, we can now head over to `src/index.js`. Go ahead and delete the `App` import and element, as we'll be rendering them through the router. Import `router` from `src/router.js` and display it inside of the `Provider` element like so `{ router }`.
+With out router configured, we can now head over to `src/index.js`. Go ahead and delete the `App` import and element, as we'll be rendering them through the router. Import `router` from `src/router.js` and render it inside of the `Provider` component.
 
 <details>
 
@@ -82,7 +82,40 @@ With out router configured, we can now head over to `src/index.js`. Go ahead and
 <summary>`src/router.js`</summary>
 
 ```jsx
+import React from "react";
+import { browserHistory, IndexRoute, Route, Router } from "react-router";
 
+import App from "./components/App";
+import Cart from "./components/Cart/Cart";
+import Details from "./components/Details/Details";
+import Landing from "./components/Details/Details";
+import Shop from "./components/Shop/Shop";
+
+export default (
+	<Router history={ browserHistory }>
+		<Route
+			component={ App }
+			path="/"
+		>
+			<IndexRoute component={ Landing }/>
+
+			<Route
+				component={ Shop }
+				path="shop"
+			/>
+
+			<Route
+				component={ Details }
+				path="details/:shop"
+			/>
+
+			<Route
+				component={ Cart }
+				path="cart"
+			/>
+		</Route>
+	</Router>
+);
 ```
 
 </details>
@@ -92,7 +125,22 @@ With out router configured, we can now head over to `src/index.js`. Go ahead and
 <summary>`src/index.js`</summary>
 
 ```jsx
+import React from "react";
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
 
+import "./index.css";
+
+import store from "./store";
+
+import router from "./router";
+
+ReactDOM.render(
+	<Provider store={ store }>
+		{ router }
+	</Provider>,
+	document.getElementById( "root" )
+);
 ```
 
 </details>
