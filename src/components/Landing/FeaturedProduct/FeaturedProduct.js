@@ -9,7 +9,7 @@ export default function FeaturedProduct( { addToCart, description, logo, name, o
 				<img
 					alt={ `${ name } logo` }
 					className="featured-product__logo"
-					src={ /* Attach the product logo */ }
+					src={ ""/* Attach the product logo */ }
 				/>
 				<h3 className="featured-product__name">{ /* Display the product name */ }</h3>
 			</div>

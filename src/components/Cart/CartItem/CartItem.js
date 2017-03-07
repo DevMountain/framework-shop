@@ -9,7 +9,7 @@ export default function CartItem( { logo, name, price } ) {
 				<img
 					alt={ `${ name } logo` }
 					className="cart-item__logo"
-					src={ /* Attach the product logo */ }
+					src={ "" /* Attach the product logo */ }
 				/>
 				<span className="cart-item__name">{ /* Display the product name */ }</span>
 			</div>

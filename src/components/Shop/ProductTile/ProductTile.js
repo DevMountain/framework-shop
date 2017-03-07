@@ -19,7 +19,7 @@ export default function ProductTile( { addToCart, logo, name, price } ) {
 				<img
 					className="product-tile__logo"
 					alt={ `${ name } logo` }
-					src={ /* Attach the product logo */ }
+					src={ "" /* Attach the product logo */ }
 				/>
 			</section>
 		</div>

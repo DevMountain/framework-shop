@@ -20,7 +20,7 @@ export function Details( { addToCart, product } ) {
 			<img
 				alt={ `${ name } logo` }
 				className="details__logo"
-				src={ /* Attach the product logo */ }
+				src={ "" /* Attach the product logo */ }
 			/>
 			<h1 className="details__name">{ /* Display the product name */ }</h1>
 			<p className="details__description">{ /* Display the product description */ }</p>
