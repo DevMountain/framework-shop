@@ -55,7 +55,16 @@ In `src/router.js` we need to import the following
 	* `Landing` from `src/components/Landing/Landing.js`
 	* `Shop` from `src/components/Shop/Shop.js`
 
+Underneath the imports, we're going to export default the JSX representing our router. You probably haven't seen this elsewhere, but you can export raw JSX just fine! The top level element of the router will be the `Router` component. The `Router` component needs to know what kind of history to use, so give it a `history` prop set equal to `browserHistory`.
 
+Now that we have an empty router, let's supply it with some routes. Place a `Route` component inside of `Router`. Each `Route` component requires two props:
+
+* `path` - This is the path when the route will be active. For example this repo lives at `https://github.com/DevMountain/framework-shop`. The `path` for this URL would be `/DevMountain/framework-shop`
+* `component` - The React component we wish to render when this route is active
+
+Because this first route will be a wrapper of our other routes, we want its `path` to be `"/"`. Because this is a base path (you can't go any lower than `"/"`), this component will always be displayed. Why would we want a base component that is always displayed? Sometimes you have something you want on the screen regardless of where a user is in your application, like a header, footer, or info bar. Rather than including those components in every single view component, we can just have a single top level component display them!
+
+For the `component` prop, we'll pass `App`. The `App` component renders the `Nav` component, so we can now have that top nav bar visible on every view!
 
 ## Contributions
 
