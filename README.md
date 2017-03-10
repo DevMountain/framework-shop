@@ -90,7 +90,7 @@ import { browserHistory, IndexRoute, Route, Router } from "react-router";
 import App from "./components/App";
 import Cart from "./components/Cart/Cart";
 import Details from "./components/Details/Details";
-import Landing from "./components/Details/Details";
+import Landing from "./components/Landing/Landing";
 import Shop from "./components/Shop/Shop";
 
 export default (
@@ -118,6 +118,7 @@ export default (
 		</Route>
 	</Router>
 );
+
 ```
 
 </details>
