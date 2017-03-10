@@ -90,7 +90,7 @@ import { browserHistory, IndexRoute, Route, Router } from "react-router";
 import App from "./components/App";
 import Cart from "./components/Cart/Cart";
 import Details from "./components/Details/Details";
-import Landing from "./components/Landing/Landing";
+import Landing from "./components/Details/Details";
 import Shop from "./components/Shop/Shop";
 
 export default (
@@ -118,7 +118,6 @@ export default (
 		</Route>
 	</Router>
 );
-
 ```
 
 </details>
@@ -167,9 +166,9 @@ In this step we will be configuring the `App` component to render child componen
 
 Right now our router is rendering `App`, but nothing else. This is because `App` is the parent route over the rest of our routes, meaning that the job of displaying those routes is delegated to the `App` component. Luckily this is easy to do! Just render the `children` prop in curly braces right below `<Nav />`. If `App` were a class component this would be referenced as `this.props.children`.
 
-App is now displaying it's child route's, but you probably can't see much yet. We need to update `src/components/Landing/Landing.js` so that it actually displays some data! Before we make any changes, take a look at the provided `mapStateToProps` and `connect`. This component will take a `products` prop that is an array of of products that are either featured or on sale. We are also passing the `addToCart` action creator to allow for dispatching a new product to cart.
+App is now displaying it's child route's, but all there is to see is a header and broken link. We need to update `src/components/Landing/Landing.js` so that it actually displays some data! Before we make any changes, take a look at the provided `mapStateToProps` and `connect`. This component will take a `products` prop that is an array of of products that are either featured or on sale. We are also passing the `addToCart` action creator to allow for dispatching a new product to cart.
 
-First off, import `Link` from React Router. The `Link` component is React Router's replacement for an `<a>` tag, used to allow the library better control over routing. Near the bottom of render wrap the `h1` with the class `landing__full-shop-link` in a `Link`.  `Link` will take one prop - `to` set equal to the path we want it to navigate to `"shop"`.
+First off, import `FeaturedProduct` from `src/components/Landing/FeaturedProduct/FeaturedProduct.js` and `Link` from React Router. The `Link` component is React Router's replacement for an `<a>` tag, used to allow the library better control over routing. Near the bottom of render wrap the `h1` with the class `landing__full-shop-link` in a `Link`.  `Link` will take one prop - `to` set equal to the path we want it to navigate to `"shop"`.
 
 At the top of the `Landing` function create a new variable `products` set equal to the result of `map`ping over `featuredProducts` and returning the following JSX
 
