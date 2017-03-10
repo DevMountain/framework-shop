@@ -166,9 +166,61 @@ In this step we will be configuring the `App` component to render child componen
 
 Right now our router is rendering `App`, but nothing else. This is because `App` is the parent route over the rest of our routes, meaning that the job of displaying those routes is delegated to the `App` component. Luckily this is easy to do! Just render the `children` prop in curly braces right below `<Nav />`. If `App` were a class component this would be referenced as `this.props.children`.
 
-App is now displaying it's child route's, but you probably can't see anything yet. We need to update `src/components/Landing/Landing.js` so that it actually displays some data!
+App is now displaying it's child route's, but you probably can't see much yet. We need to update `src/components/Landing/Landing.js` so that it actually displays some data! Before we make any changes, take a look at the provided `mapStateToProps` and `connect`. This component will take a `products` prop that is an array of of products that are either featured or on sale. We are also passing the `addToCart` action creator to allow for dispatching a new product to cart.
 
+First off, import `Link` from React Router. The `Link` component is React Router's replacement for an `<a>` tag, used to allow the library better control over routing. Near the bottom of render wrap the `h1` with the class `landing__full-shop-link` in a `Link`.  `Link` will take one prop - `to` set equal to the path we want it to navigate to `"shop"`.
 
+At the top of the `Landing` function create a new variable `products` set equal to the result of `map`ping over `featuredProducts` and returning the following JSX
+
+```jsx
+<FeaturedProduct
+	addToCart={ () => addToCart( product.id ) }
+	description={ product.description }
+	key={ product.id }
+	logo={ product.logo }
+	name={ product.name }
+	onSale={ product.onSale }
+	price={ product.price }
+/>
+```
+
+This will display a list of `FeaturedProduct` elements, but they aren't complete yet. Open up `src/components/Landing/FeaturedProduct/FeaturedProduct.js` and import `Link` from React Router. Replace the commented sections with the appropriate props. Wrap the `h3` tag that holds the product name in a `Link` component with a `to` prop of ```details/${ name }` ``. Lastly use a ternary operator to only display the "Price Reduced!" `p` tag if the product is on sale.
+
+<details>
+
+<summary>**Code Solution**</summary>
+
+<details>
+
+<summary>`src/components/App.js`</summary>
+
+```jsx
+
+```
+
+</details>
+
+<details>
+
+<summary>`src/components/Landing/Landing.js`</summary>
+
+```jsx
+
+```
+
+</details>
+
+<details>
+
+<summary>`src/components/Landing/FeaturedProduct/FeaturedProduct.js`</summary>
+
+```jsx
+
+```
+
+</details>
+
+</details>
 
 ## Contributions
 
