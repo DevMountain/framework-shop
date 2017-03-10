@@ -197,7 +197,22 @@ Open up `src/components/Landing/FeaturedProduct/FeaturedProduct.js` and import `
 <summary>`src/components/App.js`</summary>
 
 ```jsx
+import React from "react";
 
+import "./App.css";
+
+import Nav from "./Nav/Nav";
+
+export function App( { children } ) {
+	return (
+		<div className="app">
+			<Nav />
+			{ children }
+		</div>
+	);
+}
+
+export default App;
 ```
 
 </details>
@@ -207,7 +222,46 @@ Open up `src/components/Landing/FeaturedProduct/FeaturedProduct.js` and import `
 <summary>`src/components/Landing/Landing.js`</summary>
 
 ```jsx
+import React from "react";
+import { Link } from "react-router";
+import { connect } from "react-redux";
 
+import "./Landing.css";
+
+import { addToCart } from "../../ducks/product";
+
+import FeaturedProduct from "./FeaturedProduct/FeaturedProduct";
+
+export function Landing( { addToCart, featuredProducts } ) {
+	const products = featuredProducts.map( product => (
+		<FeaturedProduct
+			addToCart={ () => addToCart( product.id ) }
+			description={ product.description }
+			key={ product.id }
+			logo={ product.logo }
+			name={ product.name }
+			onSale={ product.onSale }
+			price={ product.price }
+		/>
+	) );
+
+	return (
+		<main className="landing">
+			<h1>Featured Products</h1>
+			<div className="landing__products-wrapper">
+				{ products }
+			</div>
+
+			<Link to="shop"><h1 className="landing__full-shop-link">Take me to the full shop!</h1></Link>
+		</main>
+	);
+}
+
+function mapStateToProps( { products } ) {
+	return { featuredProducts: products.filter( product => product.featured || product.onSale ) };
+}
+
+export default connect( mapStateToProps, { addToCart } )( Landing );
 ```
 
 </details>
@@ -217,7 +271,46 @@ Open up `src/components/Landing/FeaturedProduct/FeaturedProduct.js` and import `
 <summary>`src/components/Landing/FeaturedProduct/FeaturedProduct.js`</summary>
 
 ```jsx
+import React, { PropTypes } from "react";
+import { Link } from "react-router";
 
+import "./FeaturedProduct.css";
+
+export default function FeaturedProduct( { addToCart, description, logo, name, onSale, price } ) {
+	return (
+		<div className="featured-product">
+			<div className="featured-product__logo-name-wrapper">
+				<img
+					alt={ `${ name } logo` }
+					className="featured-product__logo"
+					src={ logo }
+				/>
+				<Link to={ `details/${ name }` }><h3 className="featured-product__name">{ name }</h3></Link>
+			</div>
+			<p className="featured-product__description">{ description }</p>
+			<div className="featured-product__buy-wrapper">
+				{ onSale ? <p className="featured-product__price-reduced">Price Reduced!</p> : null }
+				<button
+					className="featured-product__buy"
+					onClick={ addToCart }
+				>
+					${ price }
+				</button>
+			</div>
+		</div>
+	);
+}
+
+FeaturedProduct.propTypes = {
+	  addToCart: PropTypes.func.isRequired
+	, description: PropTypes.string.isRequired
+	, logo: PropTypes.string.isRequired
+	, name: PropTypes.string.isRequired
+	, onSale: PropTypes.bool
+	, price: PropTypes.number.isRequired
+};
+
+FeaturedProduct.defaultProps = { onSale: false };
 ```
 
 </details>
