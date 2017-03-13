@@ -1,11 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 import "./Details.css"
 
 import { addToCart } from "../../ducks/product";
 
-export function Details( { addToCart, product } ) {
+export function Details( { addToCart, history, product } ) {
 	const {
 		  description
 		, id
@@ -14,28 +15,34 @@ export function Details( { addToCart, product } ) {
 		, price
 	} = product;
 
+	function addToCartAndRedirect() {
+		addToCart( id );
+		history.goBack();
+	}
+
 	return (
 		<div className="details">
-			<h3 className="details__back-to-shop">Back to shop</h3>
+			<h3 className="details__back-to-shop"><Link to="/shop">Back to shop</Link></h3>
 			<img
 				alt={ `${ name } logo` }
 				className="details__logo"
-				src={ "" /* Attach the product logo */ }
+				src={ logo }
 			/>
-			<h1 className="details__name">{ /* Display the product name */ }</h1>
-			<p className="details__description">{ /* Display the product description */ }</p>
+			<h1 className="details__name">{ name }</h1>
+			<p className="details__description">{ description }</p>
 			<button
 				className="details__buy"
-				onClick={ () => addToCart( product.id ) }
+				onClick={ addToCartAndRedirect }
 			>
-				Buy now for ${ /* Display the product price */ }!
+				Buy now for ${ price }!
 			</button>
 		</div>
 	);
 }
 
-function mapStateToProps( state ) {
-	return state;
+function mapStateToProps( state, ownProps ) {
+	const params = ownProps.match.params;
+	return { product: state.products.find( product => product.name === params.name ) };
 }
 
 export default connect( mapStateToProps, { addToCart } )( Details );

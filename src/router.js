@@ -1,5 +1,5 @@
 import React from "react";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
 import Cart from "./components/Cart/Cart";
 import Details from "./components/Details/Details";
@@ -7,9 +7,10 @@ import Landing from "./components/Landing/Landing";
 import Shop from "./components/Shop/Shop";
 
 export default (
-	<div>
+	<Switch>
 		<Route
 			component={ Landing }
+			exact
 			path="/"
 		/>
 		<Route
@@ -24,5 +25,5 @@ export default (
 			component={ Cart }
 			path="/cart"
 		/>
-	</div>
+	</Switch>
 );
