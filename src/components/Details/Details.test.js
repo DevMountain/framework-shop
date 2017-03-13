@@ -1,6 +1,7 @@
 import React from "react";
 import { shallow } from "enzyme";
 import sinon from "sinon";
+import * as reactRouter from "react-router-dom";
 
 import { Details } from "./Details";
 
@@ -72,9 +73,33 @@ test( "Details displays the product description", () => {
 
 test( "Details calls props.addToCart on button click", () => {
 	const addToCartSpy = sinon.spy();
+
 	const details = shallow(
 		<Details
 			addToCart={ addToCartSpy }
+			history={ { goBack() {} } }
+			product={ {
+				  description: "foobarbaz"
+				, logo: "logo"
+				, name: "Foo"
+				, price: 2.99
+			} }
+		/>
+	);
+
+	details
+		.find( ".details__buy" )
+		.simulate( "click" );
+
+	sinon.assert.calledOnce( addToCartSpy );
+} );
+
+test( "Details calls history.goBack on buy", () => {
+	const goBack = sinon.spy();
+	const details = shallow(
+		<Details
+			addToCart={ () => null }
+			history={ { goBack } }
 			product={ {
 				description: "foobarbaz"
 				, logo: "logo"
@@ -88,7 +113,7 @@ test( "Details calls props.addToCart on button click", () => {
 		.find( ".details__buy" )
 		.simulate( "click" );
 
-	sinon.assert.calledOnce( addToCartSpy );
+	sinon.assert.calledOnce( goBack );
 } );
 
 test( "Details displays the product price", () => {

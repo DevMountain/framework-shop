@@ -3,16 +3,10 @@ import { shallow } from "enzyme";
 
 import { Nav } from "./Nav";
 
-test( "Nav renders an IndexLink component", () => {
+test( "Nav renders 2 Link components", () => {
 	const nav = shallow( <Nav cartTotal={ 0 } /> );
 
-	expect( nav.find( "IndexLink" ).length ).toBe( 1 );
-} );
-
-test( "Nav renders a Link component", () => {
-	const nav = shallow( <Nav cartTotal={ 0 } /> );
-
-	expect( nav.find( "Link" ).length ).toBe( 1 );
+	expect( nav.find( "Link" ).length ).toBe( 2 );
 } );
 
 test( "Nav displays the current cart total", () => {
