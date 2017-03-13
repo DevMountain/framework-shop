@@ -27,7 +27,7 @@ test( "ProductTile passes the appropriate 'to' prop to the Link", () => {
 		/>
 	);
 
-	expect( productTile.find( "Link" ).props().to ).toBe( "details/Foo" );
+	expect( productTile.find( "Link" ).props().to ).toBe( "/details/Foo" );
 } );
 
 test( "ProductTile displays the product name", () => {
