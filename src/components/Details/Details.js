@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router";
 
 import "./Details.css"
 
@@ -9,6 +8,7 @@ import { addToCart } from "../../ducks/product";
 export function Details( { addToCart, product } ) {
 	const {
 		  description
+		, id
 		, logo
 		, name
 		, price
@@ -16,7 +16,7 @@ export function Details( { addToCart, product } ) {
 
 	return (
 		<div className="details">
-			<h3 className="details__back-to-shop"><Link to="/shop">Back to shop</Link></h3>
+			<h3 className="details__back-to-shop">Back to shop</h3>
 			<img
 				alt={ `${ name } logo` }
 				className="details__logo"
