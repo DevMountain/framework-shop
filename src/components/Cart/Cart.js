@@ -3,8 +3,6 @@ import { connect } from "react-redux";
 
 import "./Cart.css";
 
-import CartItem from "./CartItem/CartItem";
-
 export function Cart( { productsInCart } ) {
 	const products = productsInCart.map( product => (
 		<CartItem

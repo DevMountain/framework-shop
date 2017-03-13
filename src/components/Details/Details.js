@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 
 import "./Details.css"
 
@@ -15,34 +14,28 @@ export function Details( { addToCart, history, product } ) {
 		, price
 	} = product;
 
-	function addToCartAndRedirect() {
-		addToCart( id );
-		history.goBack();
-	}
-
 	return (
 		<div className="details">
-			<h3 className="details__back-to-shop"><Link to="/shop">Back to shop</Link></h3>
+			<h3 className="details__back-to-shop">Back to shop</h3>
 			<img
 				alt={ `${ name } logo` }
 				className="details__logo"
-				src={ logo }
+				src={ "" /* product logo */ }
 			/>
-			<h1 className="details__name">{ name }</h1>
-			<p className="details__description">{ description }</p>
+			<h1 className="details__name">{ /* product name */ }</h1>
+			<p className="details__description">{ /* product description */ }</p>
 			<button
 				className="details__buy"
-				onClick={ addToCartAndRedirect }
+				onClick={ () => addToCart( id ) }
 			>
-				Buy now for ${ price }!
+				Buy now for ${ /* product price */ }!
 			</button>
 		</div>
 	);
 }
 
 function mapStateToProps( state, ownProps ) {
-	const params = ownProps.match.params;
-	return { product: state.products.find( product => product.name === params.name ) };
+	return state;
 }
 
 export default connect( mapStateToProps, { addToCart } )( Details );
