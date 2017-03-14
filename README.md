@@ -1,3 +1,5 @@
+<img src="https://devmounta.in/img/logowhiteblue.png" width="250" align="right">
+
 # Framework Shop
 
 ### Project Summary
@@ -176,27 +178,22 @@ export default App;
 
 </details>
 
--- EVERYTHING AFTER THIS IS V3 --
-
 ### Step 2
 
 **Summary**
 
-In this step we will be configuring the `App` component to render child components and displaying data through the `Landing` component.
+In this step we will be setting up the `Landing` component to display data and link to other views.
 
 **Instructions**
 
-* Render children in `src/components/App.js`
 * Render featured products in `src/components/Landing/Landing.js`
 * Update `src/components/Landing/FeaturedProduct/FeaturedProduct.js` to display data from props
 
 **Detailed Instructions**
 
-Right now our router is rendering `App`, but nothing else. This is because `App` is the parent route over the rest of our routes, meaning that the job of displaying those routes is delegated to the `App` component. Luckily this is easy to do! Just render the `children` prop in curly braces right below `<Nav />`. If `App` were a class component this would be referenced as `this.props.children`.
+We need to update `src/components/Landing/Landing.js` so that it actually displays some data! Before we make any changes, take a look at the provided `mapStateToProps` and `connect`. This component will take a `products` prop that is an array of of products that are either featured or on sale. We are also passing the `addToCart` action creator to allow for dispatching a new product to cart.
 
-App is now displaying it's child route's, but all there is to see is a header and broken link. We need to update `src/components/Landing/Landing.js` so that it actually displays some data! Before we make any changes, take a look at the provided `mapStateToProps` and `connect`. This component will take a `products` prop that is an array of of products that are either featured or on sale. We are also passing the `addToCart` action creator to allow for dispatching a new product to cart.
-
-First off, import `FeaturedProduct` from `src/components/Landing/FeaturedProduct/FeaturedProduct.js` and `Link` from React Router. The `Link` component is React Router's replacement for an `<a>` tag, used to allow the library better control over routing. Near the bottom of render wrap the `h1` with the class `landing__full-shop-link` in a `Link`.  `Link` will take one prop - `to` set equal to the path we want it to navigate to `"shop"`.
+First off, import `FeaturedProduct` from `src/components/Landing/FeaturedProduct/FeaturedProduct.js` and `Link` from `react-router-dom`. The `Link` component is React Router's replacement for an `<a>` tag, used to allow the library better control over routing. Near the bottom of render wrap the `h1` with the class `landing__full-shop-link` in a `Link`.  `Link` will take one prop - `to` set equal to the path we want it to navigate to `"/shop"`.
 
 At the top of the `Landing` function create a new variable `products` set equal to the result of `map`ping over `featuredProducts` and returning the following JSX
 
@@ -214,7 +211,7 @@ At the top of the `Landing` function create a new variable `products` set equal 
 
 Render the `products` variable into the `div` with a class of `landing__products-wrapper`. We're now displaying a list of `FeaturedProduct` elements, but they aren't complete yet.
 
-Open up `src/components/Landing/FeaturedProduct/FeaturedProduct.js` and import `Link` from React Router. Replace the commented sections with the appropriate props. Wrap the `h3` tag that holds the product name in a `Link` component with a `to` prop of ```details/${ name }` ``. Lastly use a ternary operator to only display the "Price Reduced!" `p` tag if the product is on sale.
+Open up `src/components/Landing/FeaturedProduct/FeaturedProduct.js` and import `Link` from React Router. Replace the commented sections with the appropriate props. Wrap the `h3` tag that holds the product name in a `Link` component with a `to` prop of ```/details/${ name }` ``. Lastly use a ternary operator to only display the "Price Reduced!" `p` tag only if the product is on sale.
 
 <details>
 
@@ -222,37 +219,12 @@ Open up `src/components/Landing/FeaturedProduct/FeaturedProduct.js` and import `
 
 <details>
 
-<summary>`src/components/App.js`</summary>
-
-```jsx
-import React from "react";
-
-import "./App.css";
-
-import Nav from "./Nav/Nav";
-
-export function App( { children } ) {
-	return (
-		<div className="app">
-			<Nav />
-			{ children }
-		</div>
-	);
-}
-
-export default App;
-```
-
-</details>
-
-<details>
-
 <summary>`src/components/Landing/Landing.js`</summary>
 
 ```jsx
 import React from "react";
-import { Link } from "react-router";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 import "./Landing.css";
 
@@ -280,7 +252,7 @@ export function Landing( { addToCart, featuredProducts } ) {
 				{ products }
 			</div>
 
-			<Link to="shop"><h1 className="landing__full-shop-link">Take me to the full shop!</h1></Link>
+			<Link to="/shop"><h1 className="landing__full-shop-link">Take me to the full shop!</h1></Link>
 		</main>
 	);
 }
@@ -300,7 +272,7 @@ export default connect( mapStateToProps, { addToCart } )( Landing );
 
 ```jsx
 import React, { PropTypes } from "react";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 
 import "./FeaturedProduct.css";
 
@@ -313,7 +285,7 @@ export default function FeaturedProduct( { addToCart, description, logo, name, o
 					className="featured-product__logo"
 					src={ logo }
 				/>
-				<Link to={ `details/${ name }` }><h3 className="featured-product__name">{ name }</h3></Link>
+				<Link to={ `/details/${ name }` }><h3 className="featured-product__name">{ name }</h3></Link>
 			</div>
 			<p className="featured-product__description">{ description }</p>
 			<div className="featured-product__buy-wrapper">
