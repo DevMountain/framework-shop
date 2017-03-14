@@ -215,11 +215,11 @@ Open up `src/components/Landing/FeaturedProduct/FeaturedProduct.js` and import `
 
 <details>
 
-<summary>**Code Solution**</summary>
+<summary><b>Code Solution</b></summary>
 
 <details>
 
-<summary>`src/components/Landing/Landing.js`</summary>
+<summary><code>src/components/Landing/Landing.js</code></summary>
 
 ```jsx
 import React from "react";
