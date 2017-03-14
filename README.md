@@ -57,7 +57,7 @@ In `src/router.js` we need to import the following
 
 Underneath the imports, we're going to export default the JSX representing our router. You probably haven't seen this elsewhere, but you can export raw JSX just fine!
 
-The top level element of the router will be the `Switch` component. We need to use a `Switch` to prevent multiple routes from displaying at the same time. `Route` component's will happily display all at the same time, as long as the current path appears to match their path.
+The top level element of the router will be the `Switch` component. We need to use a `Switch` to prevent multiple routes from displaying at the same time. `Route` component's will happily render all at the same time, as long as the current path appears to match their path.
 
 Let's supply the `Switch` with some routes. Place four `Route` components inside of `Switch`. Each `Route` component requires two props:
 
@@ -70,11 +70,11 @@ Our four routes will be the following:
 * A `Route` with a path of `"/details/:name"` and a component of `Details`. Note that we are using a route parameter here! That means that inside of the handle component we can access the `name` parameter.
 * A `Route` with a `path` of `"/cart"` and a component of `Cart`
 
-Now the our routes our configured, we need to wrap our application in a `BrowserRouter` component. Open up `src/index.js` and import `BrowserRouter` from `react-router-dom`. Inside of `ReactDOM.render` wrap the `Provider` component in `BrowserRouter`.
+Now that our routes our configured, we need to wrap our application in a `BrowserRouter` component. Open up `src/index.js` and import `BrowserRouter` from `react-router-dom`. Inside of `ReactDOM.render` wrap the `Provider` component in `BrowserRouter`.
 
 Lastly, inside of `src/components/App.js` we need to import `router` from `src/router.js` and render it just beneath `<Nav />`. Because we are rendering the `router` inside of `App`, that means `App` will always be visible! This is useful, because we want to display the top navigation bar on every page, and now we only have to render it once.
 
--- EVERYTHING AFTER THIS IS V3 --
+You should now see the `Landing` component by default, and have the ability to navigate to different routes via the address bar.
 
 <details>
 
@@ -86,38 +86,33 @@ Lastly, inside of `src/components/App.js` we need to import `router` from `src/r
 
 ```jsx
 import React from "react";
-import { browserHistory, IndexRoute, Route, Router } from "react-router";
+import { Route, Switch } from "react-router-dom";
 
-import App from "./components/App";
 import Cart from "./components/Cart/Cart";
 import Details from "./components/Details/Details";
-import Landing from "./components/Details/Details";
+import Landing from "./components/Landing/Landing";
 import Shop from "./components/Shop/Shop";
 
 export default (
-	<Router history={ browserHistory }>
+	<Switch>
 		<Route
-			component={ App }
+			component={ Landing }
+			exact
 			path="/"
-		>
-			<IndexRoute component={ Landing }/>
-
-			<Route
-				component={ Shop }
-				path="shop"
-			/>
-
-			<Route
-				component={ Details }
-				path="details/:shop"
-			/>
-
-			<Route
-				component={ Cart }
-				path="cart"
-			/>
-		</Route>
-	</Router>
+		/>
+		<Route
+			component={ Shop }
+			path="/shop"
+		/>
+		<Route
+			component={ Details }
+			path="/details/:name"
+		/>
+		<Route
+			component={ Cart }
+			path="/cart"
+		/>
+	</Switch>
 );
 ```
 
@@ -131,25 +126,57 @@ export default (
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
 
 import "./index.css";
 
 import store from "./store";
 
-import router from "./router";
+import App from "./components/App";
 
 ReactDOM.render(
-	<Provider store={ store }>
-		{ router }
-	</Provider>,
+	<BrowserRouter>
+		<Provider store={ store }>
+			<App />
+		</Provider>
+	</BrowserRouter>,
 	document.getElementById( "root" )
 );
+
 ```
 
 </details>
 
+<details>
+
+<summary>`src/components/App.js`</summary>
+
+```jsx
+import React from "react";
+
+import "./App.css";
+
+import router from "../router";
+
+import Nav from "./Nav/Nav";
+
+export function App( { children } ) {
+	return (
+		<div className="app">
+			<Nav />
+			{ router }
+		</div>
+	);
+}
+
+export default App;
+```
 
 </details>
+
+</details>
+
+-- EVERYTHING AFTER THIS IS V3 --
 
 ### Step 2
 
