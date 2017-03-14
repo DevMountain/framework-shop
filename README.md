@@ -80,11 +80,11 @@ You should now see the `Landing` component by default, and have the ability to n
 
 <details>
 
-<summary>**Code Solution**</summary>
+<summary><b>Code Solution</b></summary>
 
 <details>
 
-<summary>`src/router.js`</summary>
+<summary><code>src/router.js</code></summary>
 
 ```jsx
 import React from "react";
@@ -122,7 +122,7 @@ export default (
 
 <details>
 
-<summary>`src/index.js`</summary>
+<summary><code>src/index.js</code></summary>
 
 ```jsx
 import React from "react";
@@ -151,7 +151,7 @@ ReactDOM.render(
 
 <details>
 
-<summary>`src/components/App.js`</summary>
+<summary><code>src/components/App.js</code></summary>
 
 ```jsx
 import React from "react";
@@ -268,7 +268,7 @@ export default connect( mapStateToProps, { addToCart } )( Landing );
 
 <details>
 
-<summary>`src/components/Landing/FeaturedProduct/FeaturedProduct.js`</summary>
+<summary><code>src/components/Landing/FeaturedProduct/FeaturedProduct.js</code></summary>
 
 ```jsx
 import React, { PropTypes } from "react";
