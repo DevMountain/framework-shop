@@ -70,9 +70,11 @@ Our four routes will be the following:
 * A `Route` with a path of `"/details/:name"` and a component of `Details`. Note that we are using a route parameter here! That means that inside of the handle component we can access the `name` parameter.
 * A `Route` with a `path` of `"/cart"` and a component of `Cart`
 
---- **EVERYTHING AFTER THIS IS FROM V3** ---
+Now the our routes our configured, we need to wrap our application in a `BrowserRouter` component. Open up `src/index.js` and import `BrowserRouter` from `react-router-dom`. Inside of `ReactDOM.render` wrap the `Provider` component in `BrowserRouter`.
 
-With out router configured, we can now head over to `src/index.js`. Go ahead and delete the `App` import and element, as we'll be rendering them through the router. Import `router` from `src/router.js` and render it inside of the `Provider` component.
+Lastly, inside of `src/components/App.js` we need to import `router` from `src/router.js` and render it just beneath `<Nav />`. Because we are rendering the `router` inside of `App`, that means `App` will always be visible! This is useful, because we want to display the top navigation bar on every page, and now we only have to render it once.
+
+-- EVERYTHING AFTER THIS IS V3 --
 
 <details>
 
