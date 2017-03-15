@@ -1,7 +1,6 @@
 import React from "react";
 import { shallow } from "enzyme";
 import sinon from "sinon";
-import * as reactRouter from "react-router-dom";
 
 import { Details } from "./Details";
 

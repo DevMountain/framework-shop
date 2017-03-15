@@ -33,7 +33,7 @@ test( "Featured product renders a Link to the details page", () => {
 
 	const link = featuredProduct.find( "Link" );
 	expect( link.length ).toBe( 1 );
-	expect( link.props().to ).toBe( "details/Foo" );
+	expect( link.props().to ).toBe( "/details/Foo" );
 } );
 
 test( "FeaturedProduct displays the product name", () => {

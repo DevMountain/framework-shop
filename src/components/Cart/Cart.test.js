@@ -1,5 +1,6 @@
 import React from "react";
 import { shallow } from "enzyme";
+import sinon from "sinon";
 
 import { Cart } from "./Cart";
 
@@ -42,4 +43,40 @@ test( "Cart displays a total price of products in cart", () => {
 	cart.setProps( { productsInCart: products.slice( 0, 1 ) } );
 
 	expect( cart.find( ".cart__total" ).text() ).toBe( "$2" );
+} );
+
+test( "Cart calls props.checkout on checkout button click", () => {
+	const checkoutSpy = sinon.spy();
+
+	const cart = shallow(
+		<Cart
+			checkout={ checkoutSpy }
+			history={ { push() {} } }
+			productsInCart={ products.slice() }
+		/>
+	);
+
+	cart
+		.find( ".cart__checkout" )
+		.simulate( "click" );
+
+	sinon.assert.calledOnce( checkoutSpy );
+} );
+
+test( "Cart calls props.history.push on checkout button click", () => {
+	const push = sinon.spy();
+
+	const cart = shallow(
+		<Cart
+			checkout={ () => null }
+			history={ { push } }
+			productsInCart={ products.slice() }
+		/>
+	);
+
+	cart
+		.find( ".cart__checkout" )
+		.simulate( "click" );
+
+	sinon.assert.calledOnce( push );
 } );
