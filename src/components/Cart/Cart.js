@@ -28,6 +28,7 @@ export function Cart( { productsInCart } ) {
 							<div className="cart__total">
 								${ cartTotal }
 							</div>
+							<button className="cart__checkout">Checkout</button>
 						</div>
 			}
 		</div>
