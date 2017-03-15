@@ -1,6 +1,7 @@
 import products from "../products";
 
 const ADD_TO_CART = "ADD_TO_CART";
+const CHECKOUT = "CHECKOUT";
 
 const initialState = {
 	  products
@@ -18,10 +19,16 @@ export default function product( state = initialState, action ) {
 						  products: state.products
 						, productsInCart: [ ...state.productsInCart, action.productId ]
 					};
+		case CHECKOUT:
+			return initialState;
 		default: return state;
 	}
 }
 
 export function addToCart( productId ) {
 	return { productId, type: ADD_TO_CART };
+}
+
+export function checkout() {
+	return { type: CHECKOUT };
 }
