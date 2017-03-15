@@ -48,5 +48,5 @@ test( "Landing displays a link to the full shop", () => {
 	const link = landing.find( "Link" );
 
 	expect( link.length ).toBe( 1 );
-	expect( link.props().to ).toBe( "shop" );
+	expect( link.props().to ).toBe( "/shop" );
 } );
