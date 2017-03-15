@@ -408,6 +408,74 @@ export default connect( mapStateToProps, { addToCart } )( Details );
 
 </details>
 
+### Step 4
+
+**Summary**
+
+In this (short) step we will set up the top navigation bar to display cart information and provide some links.
+
+**Instructions**
+
+* Add a link to the `Landing` view
+* Add a link to the `Cart` view
+* Display the total cost of items in cart
+
+**Detailed Instructions**
+
+To get started, open up `src/components/Nav/Nav.js` and import `Link` from `react-router-dom`. Wrap the `div` with a class of `nav__header-wrapper` in a `Link` component with a `to` prop of `"/"`. Wrap the `p` with a class of `nav__cart` in a `Link` component with a `to` prop of `"/cart"`.
+
+Lastly, you'll notice that the Redux selector is passing in a `cartTotal` prop, display that inside of the `p.nav__cart`.
+
+That was quick and easy! Now you have the ability to navigate around the application better and should see the total update anytime you add a product to cart.
+
+<details>
+
+<summary><b>Code Solution</b></summary>
+
+```jsx
+// src/components/Nav/Nav.js
+
+import React from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+
+import "./Nav.css";
+import javascriptLogo from "../../assets/javascript.svg";
+
+export function Nav( { cartTotal } ) {
+	return (
+		<nav className="nav">
+			<Link to="/">
+				<div className="nav__header-wrapper">
+						<img
+							alt="javascript logo"
+							className="nav__javascript-logo"
+							src={ javascriptLogo }
+						/>
+						<h3 className="nav__header">
+							The JavaScript Framework Shop
+						</h3>
+				</div>
+			</Link>
+			<Link to="/cart"><p className="nav__cart">Cart ( ${ cartTotal } )</p></Link>
+		</nav>
+	);
+}
+
+function mapStateToProps( { products, productsInCart } ) {
+	return {
+		cartTotal: products
+			.filter( product => productsInCart.includes( product.id ) )
+			.reduce( ( total, { price } ) => total + price, 0 )
+			.toFixed( 2 )
+	};
+}
+
+export default connect( mapStateToProps )( Nav );
+```
+
+</details>
+
 ## Contributions
 
 ### Contributions
