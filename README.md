@@ -699,7 +699,7 @@ function mapStateToProps( { products, productsInCart } ) {
 export default connect( mapStateToProps, { checkout } )( Cart );
 ```
 
-<details>
+</details>
 
 <details>
 
@@ -722,7 +722,7 @@ export default function ThankYou() {
 }
 ```
 
-<details>
+</details>
 
 <details>
 
@@ -765,7 +765,7 @@ export default (
 );
 ```
 
-<details>
+</details>
 
 </details>
 
