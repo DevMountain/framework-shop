@@ -7,7 +7,7 @@ import { checkout } from "../../ducks/product";
 
 import CartItem from "./CartItem/CartItem";
 
-export function Cart( { checkout, productsInCart } ) {
+export function Cart( { checkout, history, productsInCart } ) {
 	const products = productsInCart.map( product => (
 		<CartItem
 			key={ product.id }
