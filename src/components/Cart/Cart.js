@@ -3,9 +3,11 @@ import { connect } from "react-redux";
 
 import "./Cart.css";
 
+import { checkout } from "../../ducks/product";
+
 import CartItem from "./CartItem/CartItem";
 
-export function Cart( { productsInCart } ) {
+export function Cart( { checkout, productsInCart } ) {
 	const products = productsInCart.map( product => (
 		<CartItem
 			key={ product.id }
@@ -39,4 +41,4 @@ function mapStateToProps( { products, productsInCart } ) {
 	return { productsInCart: products.filter( product => productsInCart.includes( product.id ) ) }
 }
 
-export default connect( mapStateToProps )( Cart );
+export default connect( mapStateToProps, { checkout } )( Cart );
