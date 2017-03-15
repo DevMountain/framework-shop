@@ -11,3 +11,15 @@
 	text-align: right;
 	width: 300px;
 }
+
+.cart__checkout {
+	border: none;
+	background-color: #5c8dff;
+	color: #ffffff;
+	cursor: pointer;
+	font-family: sans-serif;
+	font-size: 22px;
+	font-weight: 300;
+	height: 40px;
+	width: 200px;
+}
