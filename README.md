@@ -585,6 +585,190 @@ ProductTile.propTypes = {
 
 </details>
 
+### Step 6
+
+**Summary**
+
+In this step we will allow users to checkout from the cart view, creating a new component to thank them for their purchase.
+
+**Instructions**
+
+* Add a click handler to the checkout button that redirects the user to `"/thank-you"`
+* Create a new `ThankYou` component in `src/components/ThankYou/ThankYou.js`
+* Adjust the router to handle the `"/thank-you"` route
+
+**Detailed Instructions**
+
+Start in `src/components/Cart/Cart.js`. Create a new function named `checkoutAndRedirect` which takes no parameters. This function will invoke the `checkout` Redux action creator, then invoke `history.push( "/thank-you" )`. `history.push` is another method from the `window.History` API that allows us to redirect to a new route.
+
+Currently that route won't work too well, as we haven't set up a component or the router to handle it yet! Start by creating a new directory `src/components/ThankYou` and two files inside of that directory `ThankYou.js` and `ThankYou.css`. `ThankYou.css` should hold the following styles:
+
+```css
+.thank-you {
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	margin-top: 25px;
+}
+```
+
+In `ThankYou.js` import:
+
+* `React` from React
+* `ThankYou.css`
+* And `thanks` from `src/assets/thanks.gif`
+
+Create and export by default a functional component named `ThankYou`. This component should just return the following JSX:
+
+```jsx
+<div className="thank-you">
+	<img src={ thanks } />
+	<h3>Thank you for your purchase!</h3>
+</div>
+```
+
+Finally, import your `ThankYou` component into `src/router.js` and create a new `Route` where the `path` is `"/thank-you"` and the `component` is `ThankYou`.
+
+That's it! You should now be able to walk through the full e-commerce flow of viewing, selecting, and "buying" items!
+
+<details>
+
+<summary><b>Code Solution</b></summary>
+
+<details>
+
+<summary><code>src/components/Cart/Cart.js</code><summary>
+
+```jsx
+import React from "react";
+import { connect } from "react-redux";
+
+import "./Cart.css";
+
+import { checkout } from "../../ducks/product";
+
+import CartItem from "./CartItem/CartItem";
+
+export function Cart( { checkout, history, productsInCart } ) {
+	const products = productsInCart.map( product => (
+		<CartItem
+			key={ product.id }
+			logo={ product.logo }
+			name={ product.name }
+			price={ product.price }
+		/>
+	) );
+
+	const cartTotal = productsInCart.reduce( ( total, { price } ) => total + price, 0 );
+
+	function checkoutAndRedirect() {
+		checkout();
+		history.push( "/thank-you" );
+	}
+
+	return (
+		<div className="cart">
+			<h1>Cart</h1>
+			{
+				products.length === 0
+					?
+						<h3>Nothing in cart! Go buy something!</h3>
+					:
+						<main>
+							{ products }
+							<div className="cart__total">
+								${ cartTotal }
+							</div>
+							<button
+								className="cart__checkout"
+								onClick={ checkoutAndRedirect }
+							>
+								Checkout
+							</button>
+						</main>
+			}
+		</div>
+	);
+}
+
+function mapStateToProps( { products, productsInCart } ) {
+	return { productsInCart: products.filter( product => productsInCart.includes( product.id ) ) }
+}
+
+export default connect( mapStateToProps, { checkout } )( Cart );
+```
+
+<details>
+
+<details>
+
+<summary><code>src/components/ThankYou/ThankYou.js</code><summary>
+
+```jsx
+import React from "react";
+
+import "./ThankYou.css";
+
+import thanks from "../../assets/thanks.gif";
+
+export default function ThankYou() {
+	return (
+		<div className="thank-you">
+			<img src={ thanks } />
+			<h3>Thank you for your purchase!</h3>
+		</div>
+	);
+}
+```
+
+<details>
+
+<details>
+
+<summary><code>src/router.js</code><summary>
+
+```jsx
+import React from "react";
+import { Route, Switch } from "react-router-dom";
+
+import Cart from "./components/Cart/Cart";
+import Details from "./components/Details/Details";
+import Landing from "./components/Landing/Landing";
+import Shop from "./components/Shop/Shop";
+import ThankYou from "./components/ThankYou/ThankYou";
+
+export default (
+	<Switch>
+		<Route
+			component={ Landing }
+			exact
+			path="/"
+		/>
+		<Route
+			component={ Shop }
+			path="/shop"
+		/>
+		<Route
+			component={ Details }
+			path="/details/:name"
+		/>
+		<Route
+			component={ Cart }
+			path="/cart"
+		/>
+		<Route
+			component={ ThankYou }
+			path="/thank-you"
+		/>
+	</Switch>
+);
+```
+
+<details>
+
+</details>
+
 ## Contributions
 
 ### Contributions
