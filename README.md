@@ -476,6 +476,115 @@ export default connect( mapStateToProps )( Nav );
 
 </details>
 
+### Step 5
+
+**Summary**
+
+In this step we will set up the `Shop` view and its child components.
+
+**Instructions**
+
+* Render a list of `ProductTile` components in `src/components/Shop/Shop.js`
+* Update the commented sections of `src/components/Shop/ProductTile/ProductTile.js` with the appropriate props
+* Wrap the `h3` containing the product name in a `Link` component with a `to` prop of ```/details/${ name }` ``
+
+No detailed instructions for this step! If you get stuck try these before reading the solution:
+
+* This step is very similar to how we set up the `Landing` and `FeaturedProducts` components. Refer back to that!
+* Check the bottom of the `ProductTile` file to see the `propTypes` the component is expecting.
+
+<details>
+
+<summary><b>Code Solution</b></summary>
+
+<details>
+
+<summary><code>src/components/Shop/Shop.js</code></summary>
+
+```jsx
+import React from "react";
+import { connect } from "react-redux";
+
+import "./Shop.css";
+
+import { addToCart } from "../../ducks/product";
+
+import ProductTile from "./ProductTile/ProductTile";
+
+export function Shop( { addToCart, products } ) {
+	const productTiles = products.map( product => (
+		<ProductTile
+			addToCart={ () => addToCart( product.id ) }
+			key={ product.id }
+			logo={ product.logo }
+			name={ product.name }
+			price={ product.price }
+		/>
+	) );
+
+	return (
+		<div className="shop">
+			<h1 className="shop__header">Shop</h1>
+			<div className="shop__products-wrapper">
+				{ productTiles }
+			</div>
+		</div>
+	);
+}
+
+function mapStateToProps( { products } ) {
+	return { products };
+}
+export default connect( mapStateToProps, { addToCart } )( Shop );
+```
+
+</details>
+
+<details>
+
+<summary><code>src/components/Shop/FeaturedProduct/FeaturedProduct.js</code></summary>
+
+```jsx
+import React, { PropTypes } from "react";
+import { Link } from "react-router-dom";
+
+import "./ProductTile.css";
+
+export default function ProductTile( { addToCart, logo, name, price } ) {
+	return (
+		<div className="product-tile">
+			<section className="product-tile__info">
+				<Link to={ `/details/${ name }` }><h3>{ name }</h3></Link>
+				<button
+					className="product-tile__buy"
+					onClick={ addToCart }
+				>
+					${ price }
+				</button>
+			</section>
+			<section className="product-tile__logo-wrapper">
+				<img
+					className="product-tile__logo"
+					alt={ `${ name } logo` }
+					src={ logo }
+				/>
+			</section>
+		</div>
+	);
+}
+
+ProductTile.propTypes = {
+	  addToCart: PropTypes.func.isRequired
+	, logo: PropTypes.string.isRequired
+	, name: PropTypes.string.isRequired
+	, price: PropTypes.number.isRequired
+};
+```
+
+</details>
+
+</details>
+
 ## Contributions
 
 ### Contributions
