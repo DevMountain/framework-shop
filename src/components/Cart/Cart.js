@@ -23,13 +23,13 @@ export function Cart( { productsInCart } ) {
 					?
 						<h3>Nothing in cart! Go buy something!</h3>
 					:
-						<div>
+						<main>
 							{ products }
 							<div className="cart__total">
 								${ cartTotal }
 							</div>
 							<button className="cart__checkout">Checkout</button>
-						</div>
+						</main>
 			}
 		</div>
 	);

@@ -5,6 +5,12 @@
 	width: 100%;
 }
 
+.cart main {
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+}
+
 .cart__total {
 	height: 40px;
 	padding: 10px 0;
