@@ -638,7 +638,7 @@ That's it! You should now be able to walk through the full e-commerce flow of vi
 
 <details>
 
-<summary><code>src/components/Cart/Cart.js</code><summary>
+<summary><code>src/components/Cart/Cart.js</code></summary>
 
 ```jsx
 import React from "react";
@@ -703,7 +703,7 @@ export default connect( mapStateToProps, { checkout } )( Cart );
 
 <details>
 
-<summary><code>src/components/ThankYou/ThankYou.js</code><summary>
+<summary><code>src/components/ThankYou/ThankYou.js</code></summary>
 
 ```jsx
 import React from "react";
@@ -726,7 +726,7 @@ export default function ThankYou() {
 
 <details>
 
-<summary><code>src/router.js</code><summary>
+<summary><code>src/router.js</code></summary>
 
 ```jsx
 import React from "react";
