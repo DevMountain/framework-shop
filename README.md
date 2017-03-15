@@ -2,6 +2,8 @@
 
 # Framework Shop
 
+<img src="https://github.com/DevMountain/framework-shop/blob/master/readme-assets/landing.png" />
+
 ### Project Summary
 
 In this project we will be building an ecommerce shop for the sale of JavaScript libraries. Using React Router we'll set up and navigate between the various views required. Take some time to familiarize yourself with the provided components. 
