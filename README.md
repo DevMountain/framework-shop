@@ -325,6 +325,8 @@ FeaturedProduct.defaultProps = { onSale: false };
 
 In this step we will set up the `Details` component, making use of route parameters to display the correct product data.
 
+<img src="https://github.com/DevMountain/framework-shop/blob/master/readme-assets/details.png" />
+
 **Instructions**
 
 * Use route parameters to select the correct product in `mapStateToProps`
@@ -416,6 +418,8 @@ export default connect( mapStateToProps, { addToCart } )( Details );
 
 In this (short) step we will set up the top navigation bar to display cart information and provide some links.
 
+<img src="https://github.com/DevMountain/framework-shop/blob/master/readme-assets/nav.png" />
+
 **Instructions**
 
 * Add a link to the `Landing` view
@@ -483,6 +487,8 @@ export default connect( mapStateToProps )( Nav );
 **Summary**
 
 In this step we will set up the `Shop` view and its child components.
+
+<img src="https://github.com/DevMountain/framework-shop/blob/master/readme-assets/shop.png" />
 
 **Instructions**
 
