@@ -213,7 +213,7 @@ At the top of the `Landing` function create a new variable `products` set equal 
 
 Render the `products` variable into the `div` with a class of `landing__products-wrapper`. We're now displaying a list of `FeaturedProduct` elements, but they aren't complete yet.
 
-Open up `src/components/Landing/FeaturedProduct/FeaturedProduct.js` and import `Link` from React Router. Replace the commented sections with the appropriate props. Wrap the `h3` tag that holds the product name in a `Link` component with a `to` prop of <code>`/details/${ name }`</code>. Lastly use a ternary operator to only display the "Price Reduced!" `p` tag only if the product is on sale.
+Open up `src/components/Landing/FeaturedProduct/FeaturedProduct.js` and import `Link` from React Router. Replace the commented sections with the appropriate props. Wrap the `h3` tag that holds the product name in a `Link` component with a `to` prop of <code>/details/${ name }</code>. Lastly use a ternary operator to only display the "Price Reduced!" `p` tag only if the product is on sale.
 
 <details>
 
@@ -494,7 +494,7 @@ In this step we will set up the `Shop` view and its child components.
 
 * Render a list of `ProductTile` components in `src/components/Shop/Shop.js`
 * Update the commented sections of `src/components/Shop/ProductTile/ProductTile.js` with the appropriate props
-* Wrap the `h3` containing the product name in a `Link` component with a `to` prop of ```/details/${ name }` ``
+* Wrap the `h3` containing the product name in a `Link` component with a `to` prop of <code>/details/${ name }</code>
 
 No detailed instructions for this step! If you get stuck try these before reading the solution:
 
