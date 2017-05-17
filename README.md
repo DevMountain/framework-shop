@@ -1,63 +1,117 @@
 <img src="https://devmounta.in/img/logowhiteblue.png" width="250" align="right">
 
-# Framework Shop
+# Project Summary
 
 <img src="https://github.com/DevMountain/framework-shop/blob/master/readme-assets/landing.png" />
 
-### Project Summary
-
 In this project we will be building an ecommerce shop for the sale of JavaScript libraries. Using React Router we'll set up and navigate between the various views required. Take some time to familiarize yourself with the provided components:
 
-* App will be the top level component for our application
-* Nav is the top navigation bar
-* Landing will be the home page displayed when the application first loads
-* Shop will be the main shop page, displaying the items available
-* Details will be the view in which a user views a single product's information
-* Cart will be the user's cart
+* `App` will be the top level component for our application.
+* `Nav` will be the top navigation bar.
+* `Landing` will be the home page displayed when the application first loads.
+* `Shop` will be the main shop page, displaying the items available.
+* `Details` will be the view in which a user views a single product's information.
+* `Cart` will be the user's cart.
 
-Several of these have child components, used to display products in different ways.
+Several of these have child components that are used to display products in different ways.
 
 Redux has also been mostly wired up to the application. Take a quick look over the reducer to get an idea of how the application data looks.
 
-### Setup
+## Setup
 
-Get started with the usual steps: 
+* `Fork` and `clone` this repository.
+* `cd` into the project directory.
+* Run `npm i` to download the included dependencies.
+* Run `npm test` to start the test suite.
+* Run `npm start` to spin up the development server.
 
-* Fork and clone this repository
-* `cd` into the project directory
-* `npm i` to download the included dependencies
-* `npm test` to start the test suite
-* `npm start` to spin up the development server
+## Step 1
 
-### Step 1
+### Summary
 
-**Summary**
+To begin our project, we will be installing the required dependencies and configuring the router.
 
-In step 1 we will be installing the required dependencies, configuring the router, and rendering our application through the router.
+//  and rendering our application through the router.
 
-**Instructions**
+### Instructions
 
-* Install React Router
-* Create a new file in `src/` named `router.js`
-* Configure a router in the new file
-* Wrap `Provider` in a `BrowserRouter` component in `src/index.js`
-* Render the router in `src/components/App.js`
+* Install React Router.
+* Create a new file in `src/` named `router.js`.
+* Configure a router in the new file.
+* Wrap `Provider` in a `BrowserRouter` component in `src/index.js`.
+* Render the router in `src/components/App.js`.
 
-**Detailed Instructions**
+<details>
 
-Start out by running `npm i react-router-dom --save` to install and save React Router to the `package.json`.  Once that installs, create a new file in `src/` named `router.js`. This file will be where we create and configure our router.
+<summary> Detailed Instructions </summary>
 
-In `src/router.js` we need to import the following
+To being, run `npm i react-router-dom --save` to install and save React Router to the `package.json`. Once that installs, create a new file in `src/` named `router.js`. This file will be where we create and configure our router. To being creating our router we'll need to import `React` from React ince we will be using JSX to declare our routes.
 
-* `React` from React - Because we will be using JSX to declare our routes, React must be defined in the file.
-* From `react-router-dom` we'll need
-	* `Route` - The default component used for defining a new route
-	* `Switch` - A component for determining which route to display
-* Several of the provided project components will serve as an individual view/route. We'll need the following
-	* `Cart` from `src/components/Cart/Cart.js`
-	* `Details` from `src/components/Details/Details.js`
-	* `Landing` from `src/components/Landing/Landing.js`
-	* `Shop` from `src/components/Shop/Shop.js`
+```js
+import React from 'react';
+```
+
+The next thing we'll need to import is `react-router-dom`. We'll need `Route` and `Switch` from `react-router-dom`. `Route` is the default component used for defining a new route. `Switch` is a component for determining which route to display.
+
+```js
+import React from 'react';
+import { Route, Switch } from 'react-router-dom';
+```
+
+We'll also need to import the components that will server as an individual view/router. The components we'll want are: `Cart`, `Details`, `Landing`, and `Shop`.
+
+```js
+import React from 'react';
+import { Route, Switch } from 'react-router-dom';
+
+import Cart from './components/Cart/Cart';
+import Details from './components/Details/Details';
+import Landing from './components/Landing/Landing';
+import Shop from './components/Shop/Shop.js';
+```
+
+Now that we have all our imports we can focus on creating the router. We can do this by exporting JSX. The top level element will be our `Switch` component from `react-router-dom`. Create an export default statement underneathe all the `import` statements.
+
+```js
+export default (
+  <Switch>
+
+  </Switch>
+)
+```
+
+We can then add our views/routes inside the `Switch` component by using the `Route` component from `react-router-dom`. For example, if I wanted to render the `Landing` component it would look like:
+
+```js
+export default (
+  <Switch>
+    <Route component={ Landing } exact path="/" />
+  </Switch>
+)
+```
+
+The following code means that when the path of our browser is at "/" on our website it will render the `Landing` component.
+
+What is `exact`? Exact allows to specific in React Router v4 that we only want that component to render when the path is exactly "/". If we had a development server running on port 3000, that would mean the landing component would only render at: `http://localhost:3000/`.
+
+Let's add the reset of our views/routes. Don't worry about using `exact` on these routes. The remaining components to render are: `Cart`, `Details`, and `Shop`.
+
+```js
+export default (
+  <Switch>
+    <Route component={ Landing } exact path="/" />
+    <Route component={ Shop } path="/shop" />
+    <Route component={ Details } path="/details/:name" />
+    <Route component={ Cart } path="/cart" />
+  </Switch>
+)
+```
+
+
+
+</details>
+
+<br />
 
 Underneath the imports, we're going to export default the JSX representing our router. You probably haven't seen this elsewhere, but you can export raw JSX just fine!
 
