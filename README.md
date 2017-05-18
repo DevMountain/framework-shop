@@ -1000,6 +1000,10 @@ ProductTile.propTypes = {
 
 </details>
 
+<br />
+
+<img src="https://github.com/DevMountain/framework-shop/blob/solution/readme-assets/4g.gif" />
+
 ## Step 7
 
 ### Summary
