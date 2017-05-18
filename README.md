@@ -611,7 +611,12 @@ In this step, we will set up the `Details` component. We'll make use of route pa
 
 ### Instructions
 
-* Use route parameters to select the correct product in `mapStateToProps`
+* Open `src/components/Details/Details.js`.
+* Modify `mapStateToProps`:
+  * Using the `ownProps` parameter, return the single product object based on the route.
+  * Hint: Add a `console.log` in `mapStateToProps` that logs `ownProps`. Look around this object for any useful property that can indicate what product we need to display information for.
+  * Once you have that property value from `ownProps` use it in combination with a `find` method to return a single object.
+  * Hint: Use `find` on `state.products`. Return the product whose `name` is equal to the `name` in our route.
 * Update the component JSX to display the product information
 * Add a `Link` back to the shop
 * If a user adds a product to cart, redirect them back to the page they were previously on
