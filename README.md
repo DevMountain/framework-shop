@@ -1109,11 +1109,59 @@ That's it! You should now be able to walk through the full e-commerce flow of vi
 
 <details>
 
-<summary><b>Code Solution</b></summary>
+<summary> <code> src/components/ThankYou/ThankYou.js </code> </summary>
+
+```jsx
+import React from "react";
+import './ThankYou.css';
+
+import thanks from '../../assets/thanks.gif';
+
+export default function ThankYou() {
+  return (
+    <div className="thank-you">
+      <img
+        role="presentation"
+        src={ thanks }
+      />
+      <h3>Thank you for your purchase!</h3>
+    </div>
+  )
+}
+```
+
+</details>
 
 <details>
 
-<summary><code>src/components/Cart/Cart.js</code></summary>
+<summary> <code> src/router.js </code> </summary>
+
+```jsx
+import React from 'react';
+import { Switch, Route } from 'react-router-dom';
+
+import Cart from './components/Cart/Cart';
+import Details from './components/Details/Details';
+import Landing from './components/Landing/Landing';
+import Shop from './components/Shop/Shop';
+import ThankYou from './components/ThankYou/ThankYou';
+
+export default (
+  <Switch>
+    <Route component={ Landing } exact path="/" />
+    <Route component={ Shop } path="/shop" />
+    <Route component={ Details } path="/details/:name" />
+    <Route component={ Cart } path="/cart" />
+    <Route component={ ThankYou } path="/thank-you" />
+  </Switch>
+)
+```
+
+</details>
+
+<details>
+
+<summary> <code> src/components/Cart/Cart.js </code> </summary>
 
 ```jsx
 import React from "react";
@@ -1126,124 +1174,47 @@ import { checkout } from "../../ducks/product";
 import CartItem from "./CartItem/CartItem";
 
 export function Cart( { checkout, history, productsInCart } ) {
-	const products = productsInCart.map( product => (
-		<CartItem
-			key={ product.id }
-			logo={ product.logo }
-			name={ product.name }
-			price={ product.price }
-		/>
-	) );
+  const products = productsInCart.map( product => (
+    <CartItem
+      key={ product.id }
+      logo={ product.logo }
+      name={ product.name }
+      price={ product.price }
+    />
+  ) );
+  const cartTotal = productsInCart.reduce( ( total, { price } ) => total + price, 0 );
 
-	const cartTotal = productsInCart.reduce( ( total, { price } ) => total + price, 0 );
-
-	function checkoutAndRedirect() {
-		checkout();
-		history.push( "/thank-you" );
-	}
-
-	return (
-		<div className="cart">
-			<h1>Cart</h1>
-			{
-				products.length === 0
-					?
-						<h3>Nothing in cart! Go buy something!</h3>
-					:
-						<main>
-							{ products }
-							<div className="cart__total">
-								${ cartTotal }
-							</div>
-							<button
-								className="cart__checkout"
-								onClick={ checkoutAndRedirect }
-							>
-								Checkout
-							</button>
-						</main>
-			}
-		</div>
-	);
+  function checkoutAndRedirect() {
+    checkout();
+    history.push("/thank-you");
+  }
+  
+  return (
+    <div className="cart">
+      <h1>Cart</h1>
+      {
+        products.length === 0
+          ?
+            <h3>Nothing in cart! Go buy something!</h3>
+          :
+            <main>
+              { products }
+              <div className="cart__total">
+                ${ cartTotal }
+              </div>
+              <button className="cart__checkout" onClick={ checkoutAndRedirect }>Checkout</button>
+            </main>
+      }
+    </div>
+  );
 }
 
 function mapStateToProps( { products, productsInCart } ) {
-	return { productsInCart: products.filter( product => productsInCart.includes( product.id ) ) }
+  return { productsInCart: products.filter( product => productsInCart.includes( product.id ) ) }
 }
 
 export default connect( mapStateToProps, { checkout } )( Cart );
 ```
-
-</details>
-
-<details>
-
-<summary><code>src/components/ThankYou/ThankYou.js</code></summary>
-
-```jsx
-import React from "react";
-
-import "./ThankYou.css";
-
-import thanks from "../../assets/thanks.gif";
-
-export default function ThankYou() {
-	return (
-		<div className="thank-you">
-			<img
-				role="presentation"
-				src={ thanks }
-			/>
-			<h3>Thank you for your purchase!</h3>
-		</div>
-	);
-}
-```
-
-</details>
-
-<details>
-
-<summary><code>src/router.js</code></summary>
-
-```jsx
-import React from "react";
-import { Route, Switch } from "react-router-dom";
-
-import Cart from "./components/Cart/Cart";
-import Details from "./components/Details/Details";
-import Landing from "./components/Landing/Landing";
-import Shop from "./components/Shop/Shop";
-import ThankYou from "./components/ThankYou/ThankYou";
-
-export default (
-	<Switch>
-		<Route
-			component={ Landing }
-			exact
-			path="/"
-		/>
-		<Route
-			component={ Shop }
-			path="/shop"
-		/>
-		<Route
-			component={ Details }
-			path="/details/:name"
-		/>
-		<Route
-			component={ Cart }
-			path="/cart"
-		/>
-		<Route
-			component={ ThankYou }
-			path="/thank-you"
-		/>
-	</Switch>
-);
-```
-
-</details>
 
 </details>
 
