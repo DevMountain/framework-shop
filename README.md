@@ -865,6 +865,10 @@ export default connect( mapStateToProps )( Nav );
 
 </details>
 
+<br />
+
+<img src="https://github.com/DevMountain/framework-shop/blob/solution/readme-assets/3g.gif" />
+
 ## Step 5
 
 ### Summary
