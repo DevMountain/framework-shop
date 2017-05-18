@@ -265,6 +265,9 @@ export default App;
 
 </details>
 
+<br />
+
+<img src="https://github.com/DevMountain/framework-shop/blob/solution/readme-assets/1g.gif" />
 
 
 
