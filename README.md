@@ -273,7 +273,7 @@ export default App;
 
 ### Summary
 
-In this step we will be setting up the `Landing` component to display data and link to other views.
+In this step, we will be setting up the `Landing` component to display data and link to other views.
 
 ### Instructions
 
