@@ -617,7 +617,7 @@ In this step, we will set up the `Details` component. We'll make use of route pa
   * Hint: Add a `console.log` in `mapStateToProps` that logs `ownProps`. Then go into the interface and click on a route from the landing page. If you open the browser's developer tools, you should see `ownProps` get logged. Look around this object for any useful property that can indicate what product we need to display information for.
   * Once you have that property value from `ownProps` use it in combination with a `find` method to return a single object.
   * Hint: Use `find` on `state.products`. Return the product whose `name` is equal to the `name` in our route.
-* Use the product object to update all the commented out sections to correct property value.
+* Use the `product` object that gets passed in as a paramter to the `Details` function to update all the commented out sections to correct property value.
   * Hint: Add a `console.log` just above the `const` in the `Details` function of the value of `product`. Then go into the interface and click on a route from the landing page. If you open the browser's developer tools, you should see a log that shows an object. If you don't see an object, your `.find` is working incorrectly. You can browse this object to determine which properties to use to update the commented out sections.
 * Add a `Link` back to the shop
 * If a user adds a product to cart, redirect them back to the page they were previously on
