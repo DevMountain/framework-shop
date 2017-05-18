@@ -37,8 +37,8 @@ To begin our project, we will be installing the required dependencies and config
 
 * Install React Router.
 * Create a new file in `src/` named `router.js`.
-* Configure a router in the new file: 
-  * Import all necessary packages needed for the configuring a router.
+* Configure a router in `src/router.js`: 
+  * Import `Switch` and `Route` from `react-router-dom`.
   * Import the following components to use as routes:
     * `src/components/Landing/Landing.js`
     * `src/components/Shop/Shop.js`
@@ -162,8 +162,12 @@ In this step, we will take the router we just configured in `src/router.js` and 
 
 ### Instructions
 
-* Wrap `Provider` in a `BrowserRouter` component in `src/index.js`.
-* Render the router in `src/components/App.js`.
+* Open `src/index.js`.
+* Import `BrowserRouter` from `react-router-dom`.
+* Wrap the `Provider` component in a `BrowserRouter` component.
+* Open `src/components/App.js`.
+* Import `router` from `src/router.js`.
+* Underneath the `Nav` component render the `router` JSX.
 
 <details>
 
@@ -171,14 +175,95 @@ In this step, we will take the router we just configured in `src/router.js` and 
 
 <br />
 
-Now that our routes our configured, we need to wrap our application in a `BrowserRouter` component. Open up `src/index.js` and import `BrowserRouter` from `react-router-dom`. Inside of `ReactDOM.render` wrap the `Provider` component in `BrowserRouter`.
+Now that our router is configured in `src/router.js`, we need to wrap our application in a `BrowserRouter` component to make use of those routes. Open up `src/index.js` and import `BrowserRouter` from `react-router-dom`. Then inside of `ReactDOM.render` wrap the `Provider` component in a `BrowserRouter` component.
 
-Lastly, inside of `src/components/App.js` we need to import `router` from `src/router.js` and render it just beneath `<Nav />`. Because we are rendering the `router` inside of `App`, that means `App` will always be visible! This is useful, because we want to display the top navigation bar on every page, and now we only have to render it once.
+```jsx
+import { BrowserRouter } from "react-router-dom";
 
-You should now see the `Landing` component by default, and have the ability to navigate to different routes via the address bar.
+ReactDOM.render(
+  <BrowserRouter>
+    <Provider store={ store }>
+      <App />
+    </Provider>
+  </BrowserRouter>,
+  document.getElementById( "root" )
+);
+```
+
+All that is left is actually rendering our router's JSX. Let's open `src/components/App.js`. Import `router` from `src/router.js` and render it just beneath `<Nav />`. Because we are rendering the `router` inside of `App`, that means `App` will always be visible! This is useful, because we want to display the top navigation bar on every page, and now we only have to render it once.
+
+```jsx
+import router from '../router';
+
+export function App( { children } ) {
+  return (
+    <div className="app">
+      <Nav />
+      { router }
+    </div>
+  );
+}
+```
+
+You should now see the `Landing` component by default, and have the ability to navigate to different routes via the address bar. Try manually visiting all the different routes and make sure they are working.
 
 </details>
 
+### Solution
+
+<details>
+
+<summary> <code> src/index.js </code> </summary>
+
+```jsx
+import React from "react";
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
+
+import "./index.css";
+
+import store from "./store";
+
+import App from "./components/App";
+
+ReactDOM.render(
+  <BrowserRouter>
+    <Provider store={ store }>
+      <App />
+    </Provider>
+  </BrowserRouter>,
+  document.getElementById( "root" )
+);
+```
+
+</details>
+
+<details>
+
+<summary> <code> src/components/App.js </code> </summary>
+
+```jsx
+import React from "react";
+
+import "./App.css";
+
+import Nav from "./Nav/Nav";
+import router from '../router';
+
+export function App( { children } ) {
+  return (
+    <div className="app">
+      <Nav />
+      { router }
+    </div>
+  );
+}
+
+export default App;
+```
+
+</details>
 
 
 
