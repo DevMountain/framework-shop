@@ -311,7 +311,7 @@ In this step, we will be setting up the `Landing` component to display data and 
 * Update all the comments with the appropriate prop.
 * Modify the `h3` element with the `className` of `featured-produce__name`:
   * This element should be wrapped in a `Link` element.
-  * The `Link` element should have a `to` prop that equals ``` `details/${name}` ```.
+  * The `Link` element should have a `to` prop that equals ``` { `details/${name}` } ```.
 * Modify the `p` element with the `className` of `featured-product__price-reduced`:
   * This element should be inside a `ternary statement`.
   * If `onSale` is truthy, render the `p` element.
@@ -323,16 +323,16 @@ In this step, we will be setting up the `Landing` component to display data and 
 
 <br />
 
-So we have routes now but no way to get to those routes from the interface. Let's fix that by updating our `Landing` component. Open `src/components/Landing/Landing.js`. Before we make any changes, take a look at the provided `mapStateToProps` and `connect`. This component will take a `products` prop that is an array of of products that are either featured or on sale. We are also passing the `addToCart` action creator to allow for dispatching a new product to cart.
+So we have routes now but no way to get to those routes from the interface. Let's fix that by updating our `Landing` component. Open `src/components/Landing/Landing.js`. Before we make any changes, take a look at the provided `mapStateToProps` and `connect`. This component will take a `products` prop that is an array of of products that are either featured or on sale. We are also passing the `addToCart` action creator to allow for dispatching a new product to a users cart.
 
-Let's begin by importing `FeaturedProduct` from `src/components/Landing/FeaturedProduct/FeaturedProduct.js` and `Link` from `react-router-dom`. The `Link` component is React Router's replacement for an `<a>` tag which is used to allow the library better control over routing. 
+Let's begin by importing `FeaturedProduct` from `src/components/Landing/FeaturedProduct/FeaturedProduct.js` and `Link` from `react-router-dom` in `src/components/Landing/Landing.js`. The `Link` component is React Router's replacement for an `<a>` tag which is used to allow the library better control over routing. 
 
 ```js
 import { Link } from "react-router-dom";
 import FeaturedProduct from './FeaturedProduct/FeaturedProduct';
 ```
 
-Near the bottom of render wrap the `h1` with the class `landing__full-shop-link` in a `Link`. `Link` will take one prop called `to` that should equal `"/shop"`.
+Near the bottom of the `return`, wrap the `h1` with the `className` of `landing__full-shop-link` in a `Link`. `Link` will take one prop called `to` that should equal `"/shop"`.
 
 ```js
 <Link className="landing__full-shop-link" to="/shop">
@@ -342,17 +342,17 @@ Near the bottom of render wrap the `h1` with the class `landing__full-shop-link`
 
 Our `h1` element on the `Landing` component will now route to the `Shop` component when clicked on.
 
-Now let's work on getting products to actually show up. At the top of the `Landing` function create a new variable `products`. This should equal the result of mapping over `featuredProducts` and returning the following JSX:
+Now let's work on getting products to actually show up. At the top of the `Landing` function create a new variable called `products`. This should equal the result of mapping over `featuredProducts` and returning the following JSX:
 
 ```jsx
 <FeaturedProduct
-	addToCart={ () => addToCart( product.id ) }
-	description={ product.description }
-	key={ product.id }
-	logo={ product.logo }
-	name={ product.name }
-	onSale={ product.onSale }
-	price={ product.price }
+  addToCart={ () => addToCart( product.id ) }
+  description={ product.description }
+  key={ product.id }
+  logo={ product.logo }
+  name={ product.name }
+  onSale={ product.onSale }
+  price={ product.price }
 />
 ```
 
@@ -372,7 +372,7 @@ const products = featuredProducts.map( (product) => (
 )); 
 ```
 
-This will create an array of React components for us. More specifically an array of `FeaturedProduct` components. Since we used a map each featured product will have all the information related to that product. 
+This will create an array of React components for us. More specifically an array of `FeaturedProduct` components. Since we used a map, each featured product will have all the information related to that product. 
 
 We are now ready to render our products onto the landing page. Locate the `div` with the `className` of `landing__products-wrapper`. Inside that `div` render our `products`.
 
@@ -421,7 +421,7 @@ return (
 );
 ```
 
-If we take a look at our live-server ( Live server not running? Run `npm start` when in the root of the project. ) we can see that our landing page is now displaying the correct data for each product. However, it looks like all the prices are reduced and we can't click on the product to go to the details page. Let's fix this. Wrap the `h3` tag that holds the product name in a `Link` component with a `to` prop that equals ``` `details/${name}` ```.
+If we take a look at our live-server ( Live server not running? Run `npm start` when in the root of the project. ) we can see that our landing page is now displaying the correct data for each product. However, it looks like all the prices are reduced and we can't click on the product to go to the details page. Let's fix this. Wrap the `h3` tag that holds the product name in a `Link` component with a `to` prop that equals ``` { `details/${name}` } ```.
 
 ```jsx
 return (
@@ -450,7 +450,7 @@ return (
 );
 ```
 
-Now each product will have a link to its own details page. All that's left now is fixing the "Price Reduced!" label to not display for every product. Let's use a ternary statement to only display that `p` element when `onSale` is truthy. Otherwise just use `null`.
+Now each product will have a link to its own details page. All that's left now is fixing the "Price Reduced!" label to not display for every product. Let's use a `ternary statement` to only display that `p` element when `onSale` is truthy. Otherwise just use `null`.
 
 ```jsx
 return (
