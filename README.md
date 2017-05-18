@@ -1061,51 +1061,54 @@ In this step, we will allow users to checkout from the cart view. We will create
 
 <br />
 
-Let's begin by creating a `ThankYou` component in `src/components/ThankYou/ThankYou.js`. You'll need to create the `ThankYou` folder and `ThankYou` javascript file. Inside the javascript file let's create a basic react component.
+Let's begin by creating a `ThankYou` component in `src/components/ThankYou/ThankYou.js`. You'll need to create the `ThankYou` folder and `ThankYou` javascript file. Inside the javascript file let's create a basic react component that returns the JSX from the instructions above.
 
 ```js
 import React from "react";
 
 export default function ThankYou() {
-
+  return (
+    <div className="thank-you">
+      <img
+        role="presentation"
+        src={ thanks }
+      />
+      <h3>Thank you for your purchase!</h3>
+    </div>
+  )
 }
 ```
 
-Start in `src/components/Cart/Cart.js`. Create a new function named `checkoutAndRedirect` which takes no parameters. This function will invoke the `checkout` Redux action creator, then invoke `history.push( "/thank-you" )`. `history.push` is another method from the `window.History` API that allows us to redirect to a new route.
+We're now ready to configure a route with this new `ThankYou` component. Open `src/router.js` and import the `ThankYou` component. Then configure a route with a path of `"/thank-you"` and a component of `ThankYou`.
 
-Currently that route won't work too well, as we haven't set up a component or the router to handle it yet! Start by creating a new directory `src/components/ThankYou` and two files inside of that directory `ThankYou.js` and `ThankYou.css`. `ThankYou.css` should hold the following styles:
+```js
+import ThankYou from './components/ThankYou/ThankYou';
 
-```css
-.thank-you {
-	align-items: center;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	margin-top: 25px;
+export default (
+  <Switch>
+    <Route component={ Landing } exact path="/" />
+    <Route component={ Shop } path="/shop" />
+    <Route component={ Details } path="/details/:name" />
+    <Route component={ Cart } path="/cart" />
+    <Route component={ ThankYou } path="/thank-you" />
+  </Switch>
+)
+```
+
+All that's left is to hook up the button in the `Cart` view to call the `checkout` action creator and change the view to `ThankYou`. Create a new function named `checkoutAndRedirect` which takes no parameters. This function will invoke the `checkout` Redux action creator, then invoke `history.push( "/thank-you" )`.
+
+```js
+function checkoutAndRedirect() {
+  checkout();
+  history.push("/thank-you");
 }
 ```
 
-In `ThankYou.js` import:
-
-* `React` from React
-* `ThankYou.css`
-* And `thanks` from `src/assets/thanks.gif`
-
-Create and export by default a functional component named `ThankYou`. This component should just return the following JSX:
+Then in the JSX add an `onClick` attribute that calls `checkoutAndRedirect`.
 
 ```jsx
-<div className="thank-you">
-	<img
-		role="presentation"
-		src={ thanks }
-	/>
-	<h3>Thank you for your purchase!</h3>
-</div>
+<button className="cart__checkout" onClick={ checkoutAndRedirect }>Checkout</button>
 ```
-
-Finally, import your `ThankYou` component into `src/router.js` and create a new `Route` where the `path` is `"/thank-you"` and the `component` is `ThankYou`.
-
-That's it! You should now be able to walk through the full e-commerce flow of viewing, selecting, and "buying" items!
 
 </details>
 
