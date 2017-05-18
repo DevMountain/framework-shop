@@ -205,11 +205,11 @@ export function App( { children } ) {
 }
 ```
 
-You should now see the `Landing` component by default, and have the ability to navigate to different routes via the address bar. Try manually visiting all the different routes and make sure they are working.
-
 </details>
 
 ### Solution
+
+You should now see the `Landing` component by default, and have the ability to navigate to different routes via the address bar. Try manually visiting all the different routes and make sure they are working.
 
 <details>
 
