@@ -605,13 +605,11 @@ The links should now be setup to go the `details` route. However, the component 
 
 ## Step 4
 
-**Summary**
+### Summary
 
-In this step we will set up the `Details` component, making use of route parameters to display the correct product data.
+In this step, we will set up the `Details` component. We'll make use of route parameters to display the correct product data. I'll go into more detailed instructions on route paramters in the detail instructions section of this step.
 
-<img src="https://github.com/DevMountain/framework-shop/blob/master/readme-assets/details.png" />
-
-**Instructions**
+### Instructions
 
 * Use route parameters to select the correct product in `mapStateToProps`
 * Update the component JSX to display the product information
