@@ -311,7 +311,7 @@ In this step we will be setting up the `Landing` component to display data and l
 * Update all the comments with the appropriate prop.
 * Modify the `h3` element with the `className` of `featured-produce__name`:
   * This element should be wrapped in a `Link` element.
-  * The `Link` element should have a `to` prop that equals ``` details/${name} ```.
+  * The `Link` element should have a `to` prop that equals ``` `details/${name}` ```.
 * Modify the `p` element with the `className` of `featured-product__price-reduced`:
   * This element should be inside a `ternary statement`.
   * If `onSale` is truthy, render the `p` element.
