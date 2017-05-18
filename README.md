@@ -894,10 +894,10 @@ In this step, we will set up the `Shop` view and its child components.
       />
       ```
       </details>
-
-* Render a list of `ProductTile` components in `src/components/Shop/Shop.js`
-* Update the commented sections of `src/components/Shop/ProductTile/ProductTile.js` with the appropriate props
-* Wrap the `h3` containing the product name in a `Link` component with a `to` prop of <code>/details/${ name }</code>
+* Open `src/components/Shop/ProductTile/ProductTile.js`.
+* Update the commented out sections to use `props`.
+* Wrap the `h3` element in a `Link` component:
+  * The `Link` component should have a `to` prop that equals ``` `details/${ name }` ```.
 
 No detailed instructions for this step! If you get stuck try these before reading the solution:
 

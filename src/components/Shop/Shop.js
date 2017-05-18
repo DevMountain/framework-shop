@@ -5,7 +5,7 @@ import "./Shop.css";
 
 import { addToCart } from "../../ducks/product";
 
-import ProducTile from './ProductTile/ProductTile';
+import ProductTile from './ProductTile/ProductTile';
 
 export function Shop( { addToCart, products } ) {
 
