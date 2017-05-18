@@ -819,25 +819,9 @@ In this step, we will set up the top navigation bar to display cart information 
 
 <details>
 
-<summary> Detailed Instructions </summary>
-
-<br />
-
-To get started, open up `src/components/Nav/Nav.js` and import `Link` from `react-router-dom`. Wrap the `div` with a class of `nav__header-wrapper` in a `Link` component with a `to` prop of `"/"`. Wrap the `p` with a class of `nav__cart` in a `Link` component with a `to` prop of `"/cart"`.
-
-Lastly, you'll notice that the Redux selector is passing in a `cartTotal` prop, display that inside of the `p.nav__cart`.
-
-That was quick and easy! Now you have the ability to navigate around the application better and should see the total update anytime you add a product to cart.
-
-</details>
-
-<details>
-
-<summary><b>Code Solution</b></summary>
+<summary> <code> src/components/Nav/Nav.js </code> </summary>
 
 ```jsx
-// src/components/Nav/Nav.js
-
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
@@ -846,32 +830,32 @@ import "./Nav.css";
 import javascriptLogo from "../../assets/javascript.svg";
 
 export function Nav( { cartTotal } ) {
-	return (
-		<nav className="nav">
-			<Link to="/">
-				<div className="nav__header-wrapper">
-						<img
-							alt="javascript logo"
-							className="nav__javascript-logo"
-							src={ javascriptLogo }
-						/>
-						<h3 className="nav__header">
-							The JavaScript Framework Shop
-						</h3>
-				</div>
-			</Link>
-			<Link to="/cart"><p className="nav__cart">Cart ( ${ cartTotal } )</p></Link>
-		</nav>
-	);
+  return (
+    <nav className="nav">
+      <Link to="/">
+        <div className="nav__header-wrapper">
+            <img
+              alt="javascript logo"
+              className="nav__javascript-logo"
+              src={ javascriptLogo }
+            />
+            <h3 className="nav__header">
+              The JavaScript Framework Shop
+            </h3>
+        </div>
+      </Link>
+      <p className="nav__cart">Cart ( ${ cartTotal } )</p>
+    </nav>
+  );
 }
 
 function mapStateToProps( { products, productsInCart } ) {
-	return {
-		cartTotal: products
-			.filter( product => productsInCart.includes( product.id ) )
-			.reduce( ( total, { price } ) => total + price, 0 )
-			.toFixed( 2 )
-	};
+  return {
+    cartTotal: products
+      .filter( product => productsInCart.includes( product.id ) )
+      .reduce( ( total, { price } ) => total + price, 0 )
+      .toFixed( 2 )
+  };
 }
 
 export default connect( mapStateToProps )( Nav );
@@ -879,11 +863,11 @@ export default connect( mapStateToProps )( Nav );
 
 </details>
 
-### Step 5
+## Step 5
 
-**Summary**
+### Summary
 
-In this step we will set up the `Shop` view and its child components.
+In this step, we will set up the `Shop` view and its child components.
 
 <img src="https://github.com/DevMountain/framework-shop/blob/master/readme-assets/shop.png" />
 
