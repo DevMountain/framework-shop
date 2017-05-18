@@ -1004,15 +1004,46 @@ ProductTile.propTypes = {
 
 ### Summary
 
-In this step we will allow users to checkout from the cart view, creating a new component to thank them for their purchase.
+In this step, we will allow users to checkout from the cart view. We will create a new component to thank them for their purchase.
 
-**Instructions**
+### Instructions
 
-* Add a click handler to the checkout button that redirects the user to `"/thank-you"`
-* Create a new `ThankYou` component in `src/components/ThankYou/ThankYou.js`
+* Create a folder in `src/components/` called `ThankYou`.
+* Inside the `ThankYou` folder you just created, create a `ThankYou.js` file.
+* Inside the `ThankYou` folder you just created, create a `ThankYou.css` file.
+  * <details>
+
+    <summary> <code> CSS </code> </summary>
+
+    ```css
+    .thank-you {
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin-top: 25px;
+    }
+    ```
+    </details>
+* Create a basic react component called `ThankYou` that doesn't return anything.
+
 * Adjust the router to handle the `"/thank-you"` route
 
-**Detailed Instructions**
+<details>
+
+<summary> Detailed Instructions </summary>
+
+<br />
+
+Let's begin by creating a `ThankYou` component in `src/components/ThankYou/ThankYou.js`. You'll need to create the `ThankYou` folder and `ThankYou` javascript file. Inside the javascript file let's create a basic react component.
+
+```js
+import React from "react";
+
+export default function ThankYou() {
+
+}
+```
 
 Start in `src/components/Cart/Cart.js`. Create a new function named `checkoutAndRedirect` which takes no parameters. This function will invoke the `checkout` Redux action creator, then invoke `history.push( "/thank-you" )`. `history.push` is another method from the `window.History` API that allows us to redirect to a new route.
 
@@ -1049,6 +1080,10 @@ Create and export by default a functional component named `ThankYou`. This compo
 Finally, import your `ThankYou` component into `src/router.js` and create a new `Route` where the `path` is `"/thank-you"` and the `component` is `ThankYou`.
 
 That's it! You should now be able to walk through the full e-commerce flow of viewing, selecting, and "buying" items!
+
+</details>
+
+### Solution
 
 <details>
 
