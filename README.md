@@ -797,6 +797,8 @@ export default connect( mapStateToProps, { addToCart } )( Details );
 
 </details>
 
+<br />
+
 <img src="https://github.com/DevMountain/framework-shop/blob/solution/readme-assets/2g.gif" />
 
 ## Step 4
