@@ -37,9 +37,18 @@ To begin our project, we will be installing the required dependencies and config
 
 * Install React Router.
 * Create a new file in `src/` named `router.js`.
-* Configure a router in the new file.
-* Wrap `Provider` in a `BrowserRouter` component in `src/index.js`.
-* Render the router in `src/components/App.js`.
+* Configure a router in the new file: 
+  * Import all necessary packages needed for the configuring a router.
+  * Import the following components to use as routes:
+    * `src/components/Landing/Landing.js`
+    * `src/components/Shop/Shop.js`
+    * `src/components/Details/Details.js`
+    * `src/components/Cart/Cart.js`
+  * Use the following combinations of paths and components for your router:
+    * Path: "/" - Component: `Landing` - This path should be exact.
+    * Path: "/shop" - Component: `Shop`.
+    * Path: "/details/:name" - Component: `Details`.
+    * Path: "/cart" - Component: `Cart`
 
 <details>
 
@@ -69,7 +78,7 @@ import { Route, Switch } from 'react-router-dom';
 import Cart from './components/Cart/Cart';
 import Details from './components/Details/Details';
 import Landing from './components/Landing/Landing';
-import Shop from './components/Shop/Shop.js';
+import Shop from './components/Shop/Shop';
 ```
 
 Now that we have all our imports we can focus on creating the router. We can do this by exporting JSX. The top level element will be our `Switch` component from `react-router-dom`. Create an export default statement underneathe all the `import` statements.
@@ -116,11 +125,49 @@ The following code translates to:
   * A user goes to `http://localhost:3000/details/someNameGoesHere` in their browser -> The `Details` component will render.
   * A user goes to `http://localhost:3000/cart` in their browser -> The `Cart` component will render.
 
+</details>
 
+### Solution
 
+<details>
 
+<summary> <code> src/router.js </code> </summary>
+
+```jsx
+import React from 'react';
+import { Switch, Route } from 'react-router-dom';
+
+import Cart from './components/Cart/Cart';
+import Details from './components/Details/Details';
+import Landing from './components/Landing/Landing';
+import Shop from './components/Shop/Shop';
+
+export default (
+  <Switch>
+    <Route component={ Landing } exact path="/" />
+    <Route component={ Shop } path="/shop" />
+    <Route component={ Details } path="/details/:name" />
+    <Route component={ Cart } path="/cart" />
+  </Switch>
+)
+```
 
 </details>
+
+## Step 2
+
+### Summary
+
+In this step, we will take the router we just configured in `src/router.js` and add it to our application in `src/index.js`.
+
+### Instructions
+
+* Wrap `Provider` in a `BrowserRouter` component in `src/index.js`.
+* Render the router in `src/components/App.js`.
+
+<details>
+
+<summary> Detailed Instructions </summary>
 
 <br />
 
@@ -130,105 +177,16 @@ Lastly, inside of `src/components/App.js` we need to import `router` from `src/r
 
 You should now see the `Landing` component by default, and have the ability to navigate to different routes via the address bar.
 
-<details>
-
-<summary><b>Code Solution</b></summary>
-
-<details>
-
-<summary><code>src/router.js</code></summary>
-
-```jsx
-import React from "react";
-import { Route, Switch } from "react-router-dom";
-
-import Cart from "./components/Cart/Cart";
-import Details from "./components/Details/Details";
-import Landing from "./components/Landing/Landing";
-import Shop from "./components/Shop/Shop";
-
-export default (
-	<Switch>
-		<Route
-			component={ Landing }
-			exact
-			path="/"
-		/>
-		<Route
-			component={ Shop }
-			path="/shop"
-		/>
-		<Route
-			component={ Details }
-			path="/details/:name"
-		/>
-		<Route
-			component={ Cart }
-			path="/cart"
-		/>
-	</Switch>
-);
-```
-
 </details>
 
-<details>
 
-<summary><code>src/index.js</code></summary>
 
-```jsx
-import React from "react";
-import ReactDOM from "react-dom";
-import { Provider } from "react-redux";
-import { BrowserRouter } from "react-router-dom";
 
-import "./index.css";
 
-import store from "./store";
 
-import App from "./components/App";
 
-ReactDOM.render(
-	<BrowserRouter>
-		<Provider store={ store }>
-			<App />
-		</Provider>
-	</BrowserRouter>,
-	document.getElementById( "root" )
-);
 
-```
 
-</details>
-
-<details>
-
-<summary><code>src/components/App.js</code></summary>
-
-```jsx
-import React from "react";
-
-import "./App.css";
-
-import router from "../router";
-
-import Nav from "./Nav/Nav";
-
-export function App( { children } ) {
-	return (
-		<div className="app">
-			<Nav />
-			{ router }
-		</div>
-	);
-}
-
-export default App;
-```
-
-</details>
-
-</details>
 
 ### Step 2
 
