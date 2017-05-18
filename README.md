@@ -118,24 +118,11 @@ The following code translates to:
 
 
 
+
+
 </details>
 
 <br />
-
-Underneath the imports, we're going to export default the JSX representing our router. You probably haven't seen this elsewhere, but you can export raw JSX just fine!
-
-The top level element of the router will be the `Switch` component. We need to use a `Switch` to prevent multiple routes from displaying at the same time. `Route` component's will happily render all at the same time, as long as the current path appears to match their path.
-
-Let's supply the `Switch` with some routes. Place four `Route` components inside of `Switch`. Each `Route` component requires two props:
-
-* `path` - This is the path when the route will be active. For example this repo lives at `https://github.com/DevMountain/framework-shop`. The `path` for this URL would be `/DevMountain/framework-shop`
-* `component` - The React component we wish to render when this route is active
-
-Our four routes will be the following:
-* A `Route` with `component` set equal to the `Landing` component, a `path` if `"/"`, and `exact` set to `true`. The `exact` prop prevents this route from overriding our others, because technically any of the routes match `"/"`. With `exact` this route won't match unless the path is _exactly_ `"/"`.
-* A `Route` with a `path` of `"/shop"` and a `component` of `Shop`
-* A `Route` with a path of `"/details/:name"` and a component of `Details`. Note that we are using a route parameter here! That means that inside of the handle component we can access the `name` parameter.
-* A `Route` with a `path` of `"/cart"` and a component of `Cart`
 
 Now that our routes our configured, we need to wrap our application in a `BrowserRouter` component. Open up `src/index.js` and import `BrowserRouter` from `react-router-dom`. Inside of `ReactDOM.render` wrap the `Provider` component in `BrowserRouter`.
 
