@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 import "./Details.css"
 
@@ -14,9 +15,16 @@ export function Details( { addToCart, history, product } ) {
     , price
   } = product;
 
+  function addToCartAndRedirect() {
+    addToCart( id );
+    history.goBack();
+  }
+
   return (
     <div className="details">
-      <h3 className="details__back-to-shop">Back to shop</h3>
+      <Link to="/shop">
+        <h3 className="details__back-to-shop">Back to shop</h3>
+      </Link>
       <img
         alt={ name }
         className="details__logo"
@@ -26,7 +34,7 @@ export function Details( { addToCart, history, product } ) {
       <p className="details__description">{ description }</p>
       <button
         className="details__buy"
-        onClick={ addToCart( id ) }
+        onClick={ addToCartAndRedirect }
       >
         Buy now for ${ price }!
       </button>

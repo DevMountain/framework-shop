@@ -612,6 +612,8 @@ In this step, we will set up the `Details` component. We'll make use of route pa
 ### Instructions
 
 * Open `src/components/Details/Details.js`.
+* Import `Link` from `react-router-dom`.
+* Update the `h3` element to link to the `Shop` component.
 * Modify `mapStateToProps`:
   * Using the `ownProps` parameter, return the single product object based on the route.
     * Hint: Add a `console.log` in `mapStateToProps` that logs `ownProps`. Then go into the interface and click on a route from the landing page. If you open the browser's developer tools, you should see `ownProps` get logged. Look around this object for any useful property that can indicate what product we need to display information for.
@@ -619,11 +621,10 @@ In this step, we will set up the `Details` component. We'll make use of route pa
     * Hint: Use `find` on `state.products`. Return the product whose `name` is equal to the `name` in our route.
 * Use the `product` object that gets passed in as a paramter to the `Details` function to update all the commented out sections to the correct property value.
   * Hint: Add a `console.log` just above the `const` in the `Details` function of the value of `product`. Then go into the interface and click on a route from the landing page. If you open the browser's developer tools, you should see a log that shows an object. If you don't see an object, your `.find` is working incorrectly in `mapStateToProps`.
-* Create an `addToCart` function above the `return` of the `Details` function:
-  * The `buy` button is already setup to call this function with the `id` of the product when clicked.
-  * This function should capture the `id` in a parameter called `id`.
+* Create an `addToCartAndRedirect` function above the `return` of the `Details` function:
+  * The `buy` button should be modified to use this new function instead.
   * This function should call the `addToCart` action creator and pass in `id` as a parameter.
-  * This function should then `route` the user back to the landing page.
+  * This function should then `route` the user back to the previous page the user was on.
     * Hint: React Router is providing us with a `history` object which we can reference as `history`. This object contains values and methods that we can use to controll our router programmatically. Try to figure out the most efficient way to go back a page.
 
 <details>
@@ -683,7 +684,7 @@ function mapStateToProps( state, ownProps ) {
 
 Now that the component has access to the proper product object we can fill in the commented out sections with the correct data. Since I deconstructed the product object for you, we can look at that to determine what properties are on the `product` object. The product object will have a `description`, `id`, `logo`, `name`, and `price`. Let's add these values to the commented out sections.
 
-```js
+```jsx
 return (
   <div className="details">
     <h3 className="details__back-to-shop">Back to shop</h3>
@@ -704,13 +705,39 @@ return (
 );
 ```
 
+Now when we visit the details of any of the featured products we should see it's data populate the page. Let's focus on the functionality of the component now that we have the data we need. If we take a look at our `h3` element we'll notice it needs to be a link back to the `Shop` component. Let's import `Link` from `react-router-dom` and wrap the `h3` in a `Link` that has a prop called `to` that equals `"/shop"`.
 
+```jsx
+import { Link } from "react-router-dom";
 
-Import `Link` from React Router and use it inside of the `h3` element to wrap the text in a `Link` component with a `to` prop of `"/shop"`.
+<Link to="/shop">
+  <h3 className="details__back-to-shop">Back to shop</h3>
+</Link>
+```
 
-Lastly we need to update what happens when the "Buy" button is clicked. Currently it just adds the item to cart in Redux, we want it to also send the user back to the page they were previously on. To do this we will need to use another prop from React Router - `history`. The `history` object represents the [`window.History`](https://developer.mozilla.org/en-US/docs/Web/API/History) api. Write a new function inside of `Details` named `addToCartAndRedirect`. This function will invoke `addToCart` passing `id` as a prop, then invoke `history.goBack` to send the user back to the previous page.
+A user will now be able to navigate back to the store if they are not interested in the presented product. All that's left is to make our `Buy` button functional by adding the product to the cart and then routing the user back to the previous page they were on. If we take a look at our `Details` function it looks like it is taking in a `history` parameter. This is also something `react-router` is adding to our application. This object represents the `window.History` api. On this `history` object that gets passed in for us, we can see that it has a function called `goBack`. We can call that function after dispatching our `addToCart` action.
+
+```js
+function addToCartAndRedirect() {
+  addToCart( id );
+  history.goBack();
+}
+```
+
+Don't forget to update the JSX to call this new function instead of the `addToCart` action creator.
+
+```js
+<button
+  className="details__buy"
+  onClick={ addToCartAndRedirect }
+>
+  Buy now for ${ price }!
+</button>
+```
 
 </details>
+
+### Solution
 
 <details>
 
@@ -726,47 +753,47 @@ import "./Details.css"
 import { addToCart } from "../../ducks/product";
 
 export function Details( { addToCart, history, product } ) {
-	const {
-		  description
-		, id
-		, logo
-		, name
-		, price
-	} = product;
+  const {
+      description
+    , id
+    , logo
+    , name
+    , price
+  } = product;
 
-	function addToCartAndRedirect() {
-		addToCart( id );
-		history.goBack();
-	}
+  function addToCartAndRedirect() {
+    addToCart( id );
+    history.goBack();
+  }
 
-	return (
-		<div className="details">
-			<h3 className="details__back-to-shop"><Link to="/shop">Back to shop</Link></h3>
-			<img
-				alt={ `${ name } logo` }
-				className="details__logo"
-				src={ logo }
-			/>
-			<h1 className="details__name">{ name }</h1>
-			<p className="details__description">{ description }</p>
-			<button
-				className="details__buy"
-				onClick={ addToCartAndRedirect }
-			>
-				Buy now for ${ price }!
-			</button>
-		</div>
-	);
+  return (
+    <div className="details">
+      <Link to="/shop">
+        <h3 className="details__back-to-shop">Back to shop</h3>
+      </Link>
+      <img
+        alt={ name }
+        className="details__logo"
+        src={ logo }
+      />
+    <h1 className="details__name">{ name }</h1>
+      <p className="details__description">{ description }</p>
+      <button
+        className="details__buy"
+        onClick={ addToCartAndRedirect }
+      >
+        Buy now for ${ price }!
+      </button>
+    </div>
+  );
 }
 
 function mapStateToProps( state, ownProps ) {
-	return { product: state.products.find( product => product.name === ownProps.match.params.name ) };
+  return { product: state.products.find( product => product.name === ownProps.match.params.name ) };
 }
 
 export default connect( mapStateToProps, { addToCart } )( Details );
 ```
-
-</details>
 
 </details>
 
