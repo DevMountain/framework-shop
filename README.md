@@ -948,7 +948,7 @@ export function Shop( { addToCart, products } ) {
 }
 
 function mapStateToProps( { products } ) {
-	return { products };
+  return { products };
 }
 export default connect( mapStateToProps, { addToCart } )( Shop );
 ```
