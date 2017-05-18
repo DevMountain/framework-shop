@@ -875,9 +875,25 @@ export default connect( mapStateToProps )( Nav );
 
 In this step, we will set up the `Shop` view and its child components.
 
-<img src="https://github.com/DevMountain/framework-shop/blob/master/readme-assets/shop.png" />
+### Instructions
 
-**Instructions**
+* Open `src/components/Shop/Shop.js`.
+* Import `ProductTile` from `src/components/Shop/ProductTile/ProductTile.js`.
+* Create a variable called `productTiles` above the `return` of the `Shop` function: 
+  * This variable should equal a mapping over `products` that returns the following JSX:
+    * <details>
+      <summary> <code> JSX </code> </summary>
+
+      ```jsx
+      <ProductTile
+        addToCart={ () => addToCart( product.id ) }
+        key={ product.id }
+        logo={ product.logo }
+        name={ product.name }
+        price={ product.price }
+      />
+      ```
+      </details>
 
 * Render a list of `ProductTile` components in `src/components/Shop/Shop.js`
 * Update the commented sections of `src/components/Shop/ProductTile/ProductTile.js` with the appropriate props
