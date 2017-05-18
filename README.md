@@ -284,6 +284,27 @@ In this step we will be setting up the `Landing` component to display data and l
   * This element should be wrapped in a `Link` element.
   * The `Link` element should have a prop called `to` that equals `"/shop"`.
   * The `Link` element should have a `className` prop that equals `"landing__full-shop-link"`.
+* Before the `return` statement of the `Landing` function:
+  * Create a variable called `products` that equals a mapping over `featuredProducts`.
+  * The map should have one parameter called `product`.
+  * The map should return the following `JSX` for each `product`:
+    * <details>
+
+      <summary> <code> JSX </code> </summary>
+
+      ```jsx
+        <FeaturedProduct
+          addToCart={ () => addToCart( product.id ) }
+          description={ product.description }
+          key={ product.id }
+          logo={ product.logo }
+          name={ product.name }
+          onSale={ product.onSale }
+          price={ product.price }
+        />
+      ```
+
+      </details>
 * Render featured products in `src/components/Landing/Landing.js`
 * Update `src/components/Landing/FeaturedProduct/FeaturedProduct.js` to display data from props
 
