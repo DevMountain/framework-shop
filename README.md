@@ -634,7 +634,7 @@ In this step, we will set up the `Details` component. We'll make use of route pa
 
 Let's begin by opening `src/components/Details/Details.js`. Currently this view is broken and will throw errors if we try to navigate to it. This is because our `mapStateToProps` function is returning all of our application state instead of the specific product we need.
 
-To fix this we'll need to get access to our route parameters in `mapStateToProps`. Luckily connect passes a second parameter to `mapStateToProps`. This second parameter is an object that contains all the other connected `props` the component has. When diving into this object we'll see it has a `match` property. This is also equal to an object. If we take a look at that object we'll see it has a property called `params` that is also equal to an object. This `params` object contains all the params in our URL. 
+To fix this we'll need to get access to our route parameters in `mapStateToProps`. Luckily connect passes a second parameter to `mapStateToProps`. This second parameter is an object that contains all the other connected `props` the component has. When diving into this object we'll see it has a `match` property that gets added from `react-router`. This is also equal to an object. If we take a look at that object we'll see it has a property called `params` that is also equal to an object. This `params` object contains all the params in our URL. 
 
 When we created our route for details we specified we wanted a parameter called `name`. Because of this if we take a look at `ownProps.match.params` we'll see a property called `name` that equals a string. Since our landing page has three products this name will come in three different forms. Not including all the other things that are on the `ownProps` object, you will see `ownProps` come in these forms:
 
@@ -650,27 +650,63 @@ ownProps = {
 // React
 ownProps = {
   match: {
-    parmas: 'React'
+    parmas: {
+      name: 'React'
+    }
   }
 }
 // Vue
 ownProps = {
   match: {
-    params: 'Vue'
+    params: {
+      name: 'Vue'
+    }
   }
 }
 ``` 
 
+Knowing this object structure we can combine the value of `ownProps.match.params.name` with a `.find` to get the exact product object we need for our component. In the `mapStateToProps` function let's modify the original return of just `state` to return a new object.
 
-We can luckily `connect` passes a second parameter, `ownProps`, for us that represents the rest of a connected component's `props`. Using this second parameter we can update the return value to something that looks like this:
-
-```javascript
-return { product: state.products.find( product => product.name === ownProps.match.params.name ) }
+```js
+function mapStateToProps( state, ownProps ) {
+  return { };
+}
 ```
 
-The [`match`](https://reacttraining.com/react-router/web/api/match) object is passed to our component via React Router and contains information about how the current route matched the URL, including params.
+We'll want to add `product` property that equals the object of the product. On `state` there is a property called `products` that is an array that contains all the `product` objects. Let's use a `.find` on that array to return the object whose `name` property equals the name property on `ownProps.match.params.name`.
 
-Now that the component has access to the proper product object go ahead and update the commented sections to display the appropriate data. Import `Link` from React Router and use it inside of the `h3` element to wrap the text in a `Link` component with a `to` prop of `"/shop"`.
+```js
+function mapStateToProps( state, ownProps ) {
+  return { product: state.products.find( product => product.name === ownProps.match.params.name ) };
+}
+```
+
+Now that the component has access to the proper product object we can fill in the commented out sections with the correct data. Since I deconstructed the product object for you, we can look at that to determine what properties are on the `product` object. Product will have a `description`, `id`, `logo`, `name`, and `price`. Let's add these values to the commented out sections.
+
+```js
+return (
+  <div className="details">
+    <h3 className="details__back-to-shop">Back to shop</h3>
+    <img
+      alt={ name }
+      className="details__logo"
+      src={ logo }
+    />
+  <h1 className="details__name">{ name }</h1>
+    <p className="details__description">{ description }</p>
+    <button
+      className="details__buy"
+      onClick={ addToCart( id ) }
+    >
+      Buy now for ${ price }!
+    </button>
+  </div>
+);
+```
+
+
+
+Import `Link` from React Router and use it inside of the `h3` element to wrap the text in a `Link` component with a `to` prop of `"/shop"`.
 
 Lastly we need to update what happens when the "Buy" button is clicked. Currently it just adds the item to cart in Redux, we want it to also send the user back to the page they were previously on. To do this we will need to use another prop from React Router - `history`. The `history` object represents the [`window.History`](https://developer.mozilla.org/en-US/docs/Web/API/History) api. Write a new function inside of `Details` named `addToCartAndRedirect`. This function will invoke `addToCart` passing `id` as a prop, then invoke `history.goBack` to send the user back to the previous page.
 
