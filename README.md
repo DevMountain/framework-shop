@@ -894,6 +894,7 @@ In this step, we will set up the `Shop` view and its child components.
       />
       ```
       </details>
+* Inside the `div` with the `className` of `"shop__products-wrapper"` render the `productTiles` variable.
 * Open `src/components/Shop/ProductTile/ProductTile.js`.
 * Update the commented out sections to use `props`.
 * Wrap the `h3` element in a `Link` component:
@@ -906,11 +907,7 @@ No detailed instructions for this step! If you get stuck try these before readin
 
 <details>
 
-<summary><b>Code Solution</b></summary>
-
-<details>
-
-<summary><code>src/components/Shop/Shop.js</code></summary>
+<summary> <code>src/components/Shop/Shop.js</code> </summary>
 
 ```jsx
 import React from "react";
@@ -920,27 +917,27 @@ import "./Shop.css";
 
 import { addToCart } from "../../ducks/product";
 
-import ProductTile from "./ProductTile/ProductTile";
+import ProductTile from './ProductTile/ProductTile';
 
 export function Shop( { addToCart, products } ) {
-	const productTiles = products.map( product => (
-		<ProductTile
-			addToCart={ () => addToCart( product.id ) }
-			key={ product.id }
-			logo={ product.logo }
-			name={ product.name }
-			price={ product.price }
-		/>
-	) );
+  const productTiles = products.map( (product) => (
+    <ProductTile
+      addToCart={ () => addToCart( product.id ) }
+      key={ product.id }
+      logo={ product.logo }
+      name={ product.name }
+      price={ product.price }
+    />
+  ));
 
-	return (
-		<div className="shop">
-			<h1 className="shop__header">Shop</h1>
-			<div className="shop__products-wrapper">
-				{ productTiles }
-			</div>
-		</div>
-	);
+  return (
+    <div className="shop">
+      <h1 className="shop__header">Shop</h1>
+      <div className="shop__products-wrapper">
+        { productTiles }
+      </div>
+    </div>
+  );
 }
 
 function mapStateToProps( { products } ) {
@@ -953,7 +950,7 @@ export default connect( mapStateToProps, { addToCart } )( Shop );
 
 <details>
 
-<summary><code>src/components/Shop/FeaturedProduct/FeaturedProduct.js</code></summary>
+<summary> <code> src/components/Shop/ProductTile/ProductTile.js </code> </summary>
 
 ```jsx
 import React, { PropTypes } from "react";
@@ -962,43 +959,43 @@ import { Link } from "react-router-dom";
 import "./ProductTile.css";
 
 export default function ProductTile( { addToCart, logo, name, price } ) {
-	return (
-		<div className="product-tile">
-			<section className="product-tile__info">
-				<Link to={ `/details/${ name }` }><h3>{ name }</h3></Link>
-				<button
-					className="product-tile__buy"
-					onClick={ addToCart }
-				>
-					${ price }
-				</button>
-			</section>
-			<section className="product-tile__logo-wrapper">
-				<img
-					className="product-tile__logo"
-					alt={ `${ name } logo` }
-					src={ logo }
-				/>
-			</section>
-		</div>
-	);
+  return (
+    <div className="product-tile">
+      <section className="product-tile__info">
+        <Link to={ `details/${ name }` }>
+          <h3> { name } </h3>
+        </Link>
+        <button
+          className="product-tile__buy"
+          onClick={ addToCart }
+        >
+          ${ price }
+        </button>
+      </section>
+      <section className="product-tile__logo-wrapper">
+        <img
+          className="product-tile__logo"
+          alt={ `${ name } logo` }
+          src={ logo }
+        />
+      </section>
+    </div>
+  );
 }
 
 ProductTile.propTypes = {
-	  addToCart: PropTypes.func.isRequired
-	, logo: PropTypes.string.isRequired
-	, name: PropTypes.string.isRequired
-	, price: PropTypes.number.isRequired
+  addToCart: PropTypes.func.isRequired,
+  logo: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired
 };
 ```
 
 </details>
 
-</details>
+## Step 7
 
-### Step 6
-
-**Summary**
+### Summary
 
 In this step we will allow users to checkout from the cart view, creating a new component to thank them for their purchase.
 
