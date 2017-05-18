@@ -1012,7 +1012,6 @@ In this step, we will allow users to checkout from the cart view. We will create
 * Inside the `ThankYou` folder you just created, create a `ThankYou.js` file.
 * Inside the `ThankYou` folder you just created, create a `ThankYou.css` file.
   * <details>
-
     <summary> <code> CSS </code> </summary>
 
     ```css
@@ -1025,7 +1024,27 @@ In this step, we will allow users to checkout from the cart view. We will create
     }
     ```
     </details>
-* Create a basic react component called `ThankYou` that doesn't return anything.
+* Create a basic react component called `ThankYou`:
+  * Import `React` from `react`.
+  * Import `./ThankYou.css`.
+  * Import `thanks` from `src/assets/thanks.gif`.
+  * The `ThankYou` component should return the following JSX:
+    * <details>
+      <summary> <code> JSX </code> </summary>
+
+      ```jsx
+      <div className="thank-you">
+        <img
+          role="presentation"
+          src={ thanks }
+        />
+        <h3>Thank you for your purchase!</h3>
+      </div>
+      ```
+      </details>
+* Open `src/route.js`.
+* Import the `ThankYou` from `src/components/ThankYou/ThankYou.js`.
+* Create a new `route` where the `path` is `"/thank-you"` and the component is `ThankYou`.
 
 * Adjust the router to handle the `"/thank-you"` route
 
