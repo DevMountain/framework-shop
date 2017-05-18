@@ -797,27 +797,33 @@ export default connect( mapStateToProps, { addToCart } )( Details );
 
 </details>
 
-### Step 4
+<img src="https://github.com/DevMountain/framework-shop/blob/solution/readme-assets/2g.gif" />
 
-**Summary**
+## Step 4
 
-In this (short) step we will set up the top navigation bar to display cart information and provide some links.
+### Summary
 
-<img src="https://github.com/DevMountain/framework-shop/blob/master/readme-assets/nav.png" />
+In this step, we will set up the top navigation bar to display cart information and provide some links.
 
-**Instructions**
+### Instructions
 
 * Add a link to the `Landing` view
 * Add a link to the `Cart` view
 * Display the total cost of items in cart
 
-**Detailed Instructions**
+<details>
+
+<summary> Detailed Instructions </summary>
+
+<br />
 
 To get started, open up `src/components/Nav/Nav.js` and import `Link` from `react-router-dom`. Wrap the `div` with a class of `nav__header-wrapper` in a `Link` component with a `to` prop of `"/"`. Wrap the `p` with a class of `nav__cart` in a `Link` component with a `to` prop of `"/cart"`.
 
 Lastly, you'll notice that the Redux selector is passing in a `cartTotal` prop, display that inside of the `p.nav__cart`.
 
 That was quick and easy! Now you have the ability to navigate around the application better and should see the total update anytime you add a product to cart.
+
+</details>
 
 <details>
 
