@@ -632,9 +632,12 @@ In this step, we will set up the `Details` component. We'll make use of route pa
 
 <br />
 
-This step will take place inside of `src/components/Details/Details.js`. Currently this view is broken, and will throw errors if we try to navigate to it. This is because our `mapStateToProps` function is returning all of our application state instead of the specific product we need.
+Let's begin by opening `src/components/Details/Details.js`. Currently this view is broken and will throw errors if we try to navigate to it. This is because our `mapStateToProps` function is returning all of our application state instead of the specific product we need.
 
-To fix this we'll need to get access to our route parameters in `mapStateToProps`, luckily `connect` passes a second parameter, `ownProps`, for us that represents the rest of a connected component's `props`. Using this second parameter we can update the return value to something that looks like this:
+To fix this we'll need to get access to our route parameters in `mapStateToProps`. Luckily connect passes a second parameter to `mapStateToProps`. It's 
+
+
+We can luckily `connect` passes a second parameter, `ownProps`, for us that represents the rest of a connected component's `props`. Using this second parameter we can update the return value to something that looks like this:
 
 ```javascript
 return { product: state.products.find( product => product.name === ownProps.match.params.name ) }
