@@ -844,7 +844,9 @@ export function Nav( { cartTotal } ) {
             </h3>
         </div>
       </Link>
-      <p className="nav__cart">Cart ( ${ cartTotal } )</p>
+      <Link to="/cart">
+        <p className="nav__cart">Cart ( ${ cartTotal } )</p>
+      </Link>
     </nav>
   );
 }
