@@ -8,11 +8,11 @@ import { addToCart } from "../../ducks/product";
 
 export function Details( { addToCart, history, product } ) {
   const {
-      description
-    , id
-    , logo
-    , name
-    , price
+    description,
+    id,
+    logo,
+    name,
+    price,  
   } = product;
 
   function addToCartAndRedirect() {

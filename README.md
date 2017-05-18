@@ -754,11 +754,11 @@ import { addToCart } from "../../ducks/product";
 
 export function Details( { addToCart, history, product } ) {
   const {
-      description
-    , id
-    , logo
-    , name
-    , price
+    description,
+    id,
+    logo,
+    name,
+    price,  
   } = product;
 
   function addToCartAndRedirect() {
@@ -809,9 +809,13 @@ In this step, we will set up the top navigation bar to display cart information 
 
 ### Instructions
 
-* Add a link to the `Landing` view
-* Add a link to the `Cart` view
-* Display the total cost of items in cart
+* Open `src/components/Nav/Nav.js`.
+* Import `Link` from `react-router-dom`.
+* Wrap the `div` with a `className` of `nav__header-wrapper` in a `Link` component:
+  * The `Link` component should have a `to` prop that equals "/".
+* Wrap the `p` element with the `className` of `nav__cart` in a `Link` component:
+  * The `Link` component should have a `to` prop that equals "/cart".
+  * Update the text of the `p` element to display `cartTotal`. This value comes from the `mapStateToProps` function below.
 
 <details>
 
