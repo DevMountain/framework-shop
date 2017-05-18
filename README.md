@@ -801,7 +801,7 @@ export default connect( mapStateToProps, { addToCart } )( Details );
 
 <img src="https://github.com/DevMountain/framework-shop/blob/solution/readme-assets/2g.gif" />
 
-## Step 4
+## Step 5
 
 ### Summary
 
@@ -869,7 +869,7 @@ export default connect( mapStateToProps )( Nav );
 
 <img src="https://github.com/DevMountain/framework-shop/blob/solution/readme-assets/3g.gif" />
 
-## Step 5
+## Step 6
 
 ### Summary
 
