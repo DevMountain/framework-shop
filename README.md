@@ -305,8 +305,17 @@ In this step we will be setting up the `Landing` component to display data and l
       ```
 
       </details>
-* Render featured products in `src/components/Landing/Landing.js`
-* Update `src/components/Landing/FeaturedProduct/FeaturedProduct.js` to display data from props
+* Render `products` inside the `div` with the `className` of `landing__products-wrapper`.
+* Open `src/components/Landing/FeaturedProduct/FeaturedProduct.js`.
+* Import `Link` from `react-router-dom`.
+* Update all the comments with the appropriate prop.
+* Modify the `h3` element with the `className` of `featured-produce__name`:
+  * This element should be wrapped in a `Link` element.
+  * The `Link` element should have a `to` prop that equals ```details/${name}```.
+* Modify the `p` element with the `className` of `featured-product__price-reduced`:
+  * This element should be inside a `ternary statement`.
+  * If `onSale` is truthy, render the `p` element.
+  * If `onSale` is not truthy, use `null`.
 
 **Detailed Instructions**
 
