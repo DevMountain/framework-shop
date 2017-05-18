@@ -317,7 +317,11 @@ In this step we will be setting up the `Landing` component to display data and l
   * If `onSale` is truthy, render the `p` element.
   * If `onSale` is not truthy, use `null`.
 
-**Detailed Instructions**
+<details>
+
+<summary> Detailed Instructions </summary>
+
+<br />
 
 We need to update `src/components/Landing/Landing.js` so that it actually displays some data! Before we make any changes, take a look at the provided `mapStateToProps` and `connect`. This component will take a `products` prop that is an array of of products that are either featured or on sale. We are also passing the `addToCart` action creator to allow for dispatching a new product to cart.
 
@@ -340,6 +344,8 @@ At the top of the `Landing` function create a new variable `products` set equal 
 Render the `products` variable into the `div` with a class of `landing__products-wrapper`. We're now displaying a list of `FeaturedProduct` elements, but they aren't complete yet.
 
 Open up `src/components/Landing/FeaturedProduct/FeaturedProduct.js` and import `Link` from React Router. Replace the commented sections with the appropriate props. Wrap the `h3` tag that holds the product name in a `Link` component with a `to` prop of <code>/details/${ name }</code>. Lastly use a ternary operator to only display the "Price Reduced!" `p` tag only if the product is on sale.
+
+</details>
 
 <details>
 
