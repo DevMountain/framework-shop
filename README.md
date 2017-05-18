@@ -620,7 +620,7 @@ In this step, we will set up the `Details` component. We'll make use of route pa
 * Use the `product` object that gets passed in as a paramter to the `Details` function to update all the commented out sections to the correct property value.
   * Hint: Add a `console.log` just above the `const` in the `Details` function of the value of `product`. Then go into the interface and click on a route from the landing page. If you open the browser's developer tools, you should see a log that shows an object. If you don't see an object, your `.find` is working incorrectly in `mapStateToProps`.
 * Create an `addToCart` function above the `return` of the `Details` function:
-  * The `buy` button is already setup to call this function and pass in the `id` of the product.
+  * The `buy` button is already setup to call this function when clicked and will also pass in the `id` of the product.
   * This function should capture the `id` in a parameter called `id`.
   * This function should call the `addToCart` action creator and pass in `id` as a parameter.
   * This function should then `route` the user back to the landing page.
