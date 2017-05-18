@@ -681,7 +681,7 @@ function mapStateToProps( state, ownProps ) {
 }
 ```
 
-Now that the component has access to the proper product object we can fill in the commented out sections with the correct data. Since I deconstructed the product object for you, we can look at that to determine what properties are on the `product` object. Product will have a `description`, `id`, `logo`, `name`, and `price`. Let's add these values to the commented out sections.
+Now that the component has access to the proper product object we can fill in the commented out sections with the correct data. Since I deconstructed the product object for you, we can look at that to determine what properties are on the `product` object. The product object will have a `description`, `id`, `logo`, `name`, and `price`. Let's add these values to the commented out sections.
 
 ```js
 return (
