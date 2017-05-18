@@ -1028,7 +1028,7 @@ In this step, we will allow users to checkout from the cart view. We will create
     }
     ```
     </details>
-* Create a basic react component called `ThankYou`:
+* Create a basic react component called `ThankYou` in `src/components/ThankYou/ThankYou.js`:
   * Import `React` from `react`.
   * Import `./ThankYou.css`.
   * Import `thanks` from `src/assets/thanks.gif`.
