@@ -293,15 +293,15 @@ In this step we will be setting up the `Landing` component to display data and l
       <summary> <code> JSX </code> </summary>
 
       ```jsx
-        <FeaturedProduct
-          addToCart={ () => addToCart( product.id ) }
-          description={ product.description }
-          key={ product.id }
-          logo={ product.logo }
-          name={ product.name }
-          onSale={ product.onSale }
-          price={ product.price }
-        />
+      <FeaturedProduct
+        addToCart={ () => addToCart( product.id ) }
+        description={ product.description }
+        key={ product.id }
+        logo={ product.logo }
+        name={ product.name }
+        onSale={ product.onSale }
+        price={ product.price }
+      />
       ```
 
       </details>
