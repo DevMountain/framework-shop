@@ -601,6 +601,8 @@ FeaturedProduct.defaultProps = { onSale: false };
 
 <img src="https://github.com/DevMountain/framework-shop/blob/solution/readme-assets/1.png" />
 
+The links should now be setup to go the `details` route. However, the component is intentionally broken. We will fix this in the next step. If your view looks like the picture above, you are good to go!
+
 ## Step 4
 
 **Summary**
