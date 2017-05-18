@@ -726,7 +726,7 @@ function addToCartAndRedirect() {
 
 Don't forget to update the JSX to call this new function instead of the `addToCart` action creator.
 
-```js
+```jsx
 <button
   className="details__buy"
   onClick={ addToCartAndRedirect }
