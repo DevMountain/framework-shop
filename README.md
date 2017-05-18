@@ -634,7 +634,32 @@ In this step, we will set up the `Details` component. We'll make use of route pa
 
 Let's begin by opening `src/components/Details/Details.js`. Currently this view is broken and will throw errors if we try to navigate to it. This is because our `mapStateToProps` function is returning all of our application state instead of the specific product we need.
 
-To fix this we'll need to get access to our route parameters in `mapStateToProps`. Luckily connect passes a second parameter to `mapStateToProps`. It's 
+To fix this we'll need to get access to our route parameters in `mapStateToProps`. Luckily connect passes a second parameter to `mapStateToProps`. This second parameter is an object that contains all the other connected `props` the component has. When diving into this object we'll see it has a `match` property. This is also equal to an object. If we take a look at that object we'll see it has a property called `params` that is also equal to an object. This `params` object contains all the params in our URL. 
+
+When we created our route for details we specified we wanted a parameter called `name`. Because of this if we take a look at `ownProps.match.params` we'll see a property called `name` that equals a string. Since our landing page has three products this name will come in three different forms. Not including all the other things that are on the `ownProps` object, you will see `ownProps` come in these forms:
+
+```js
+// Backbone
+ownProps = {
+  match: {
+    params: {
+      name: 'Backbone'
+    }
+  }
+}
+// React
+ownProps = {
+  match: {
+    parmas: 'React'
+  }
+}
+// Vue
+ownProps = {
+  match: {
+    params: 'Vue'
+  }
+}
+``` 
 
 
 We can luckily `connect` passes a second parameter, `ownProps`, for us that represents the rest of a connected component's `props`. Using this second parameter we can update the return value to something that looks like this:

@@ -35,6 +35,7 @@ export function Details( { addToCart, history, product } ) {
 }
 
 function mapStateToProps( state, ownProps ) {
+  console.log(ownProps);
   return state;
 }
 
