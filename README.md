@@ -597,6 +597,10 @@ FeaturedProduct.defaultProps = { onSale: false };
 
 </details>
 
+<br />
+
+<img src="https://github.com/DevMountain/framework-shop/blob/solution/readme-assets/1.png" />
+
 ## Step 4
 
 **Summary**
