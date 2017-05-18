@@ -1042,10 +1042,14 @@ In this step, we will allow users to checkout from the cart view. We will create
       </div>
       ```
       </details>
-* Open `src/route.js`.
+* Open `src/router.js`.
 * Import the `ThankYou` from `src/components/ThankYou/ThankYou.js`.
 * Create a new `route` where the `path` is `"/thank-you"` and the component is `ThankYou`.
-* Adjust the router to handle the `"/thank-you"` route
+* Open `src/components/Cart/Cart.js`.
+* Create a function called `checkoutAndRedirect` just above the `return` statement:
+  * This function should call the `checkout` action creator.
+  * This function should use `history.push` to route to `"/thank-you"`.
+* Update the `button` with the `className` of `"cart__checkout"` to call the `checkoutAndRedirect` function.
 
 <details>
 
