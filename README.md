@@ -673,7 +673,7 @@ function mapStateToProps( state, ownProps ) {
 }
 ```
 
-We'll want to add `product` property that equals the object of the product. On `state` there is a property called `products` that is an array that contains all the `product` objects. Let's use a `.find` on that array to return the object whose `name` property equals the name property on `ownProps.match.params.name`.
+On `state` there is a property called `products` that is an array that contains all the `product` objects. Let's use a `.find` on that array to return the object whose `name` property equals the name property on `ownProps.match.params.name`.
 
 ```js
 function mapStateToProps( state, ownProps ) {
