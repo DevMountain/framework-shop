@@ -45,6 +45,8 @@ To begin our project, we will be installing the required dependencies and config
 
 <summary> Detailed Instructions </summary>
 
+<br />
+
 To being, run `npm i react-router-dom --save` to install and save React Router to the `package.json`. Once that installs, create a new file in `src/` named `router.js`. This file will be where we create and configure our router. To being creating our router we'll need to import `React` from React ince we will be using JSX to declare our routes.
 
 ```js
@@ -106,6 +108,13 @@ export default (
   </Switch>
 )
 ```
+
+The following code translates to:
+  * Say the server is hosted locally on port 3000.
+  * A user goes to `http://localhost:3000/` in their browser -> The `Landing` component will render.
+  * A user goes to `http://localhost:3000/shop` in their browser -> The `Shop` component will render.
+  * A user goes to `http://localhost:3000/details/someNameGoesHere` in their browser -> The `Details` component will render.
+  * A user goes to `http://localhost:3000/cart` in their browser -> The `Cart` component will render.
 
 
 
