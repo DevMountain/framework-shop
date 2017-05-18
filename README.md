@@ -269,21 +269,21 @@ export default App;
 
 <img src="https://github.com/DevMountain/framework-shop/blob/solution/readme-assets/1g.gif" />
 
+## Step 3
 
-
-
-
-
-
-
-### Step 2
-
-**Summary**
+### Summary
 
 In this step we will be setting up the `Landing` component to display data and link to other views.
 
-**Instructions**
+### Instructions
 
+* Open `src/components/Landing/Landing.js`.
+* Import `FeaturedProduct` from `src/components/Landing/FeaturedProduct/FeaturedProduct.js`.
+* Import `Link` from `react-router-dom`.
+* Modify the `h1` for "Take me to the full shop!":
+  * This element should be wrapped in a `Link` element.
+  * The `Link` element should have a prop called `to` that equals `"/shop"`.
+  * The `Link` element should have a `className` prop that equals `"landing__full-shop-link"`.
 * Render featured products in `src/components/Landing/Landing.js`
 * Update `src/components/Landing/FeaturedProduct/FeaturedProduct.js` to display data from props
 
