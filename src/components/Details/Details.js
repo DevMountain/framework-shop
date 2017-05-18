@@ -35,7 +35,7 @@ export function Details( { addToCart, history, product } ) {
 }
 
 function mapStateToProps( state, ownProps ) {
-  return { product: state.products.find( product => product.name === ownProps.match.params.name ) };
+  return state;
 }
 
 export default connect( mapStateToProps, { addToCart } )( Details );

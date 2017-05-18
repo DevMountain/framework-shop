@@ -614,15 +614,23 @@ In this step, we will set up the `Details` component. We'll make use of route pa
 * Open `src/components/Details/Details.js`.
 * Modify `mapStateToProps`:
   * Using the `ownProps` parameter, return the single product object based on the route.
-  * Hint: Add a `console.log` in `mapStateToProps` that logs `ownProps`. Then go into the interface and click on a route from the landing page. If you open the browser's developer tools, you should see `ownProps` get logged. Look around this object for any useful property that can indicate what product we need to display information for.
+    * Hint: Add a `console.log` in `mapStateToProps` that logs `ownProps`. Then go into the interface and click on a route from the landing page. If you open the browser's developer tools, you should see `ownProps` get logged. Look around this object for any useful property that can indicate what product we need to display information for.
   * Once you have that property value from `ownProps` use it in combination with a `find` method to return a single object.
-  * Hint: Use `find` on `state.products`. Return the product whose `name` is equal to the `name` in our route.
+    * Hint: Use `find` on `state.products`. Return the product whose `name` is equal to the `name` in our route.
 * Use the `product` object that gets passed in as a paramter to the `Details` function to update all the commented out sections to the correct property value.
-  * Hint: Add a `console.log` just above the `const` in the `Details` function of the value of `product`. Then go into the interface and click on a route from the landing page. If you open the browser's developer tools, you should see a log that shows an object. If you don't see an object, your `.find` is working incorrectly. You can browse this object to determine which properties to use to update the commented out sections.
-* Add a `Link` back to the shop
-* If a user adds a product to cart, redirect them back to the page they were previously on
+  * Hint: Add a `console.log` just above the `const` in the `Details` function of the value of `product`. Then go into the interface and click on a route from the landing page. If you open the browser's developer tools, you should see a log that shows an object. If you don't see an object, your `.find` is working incorrectly in `mapStateToProps`.
+* Create an `addToCart` function above the `return` of the `Details` function:
+  * The `buy` button is already setup to call this function and pass in the `id` of the product.
+  * This function should capture the `id` in a parameter called `id`.
+  * This function should call the `addToCart` action creator and pass in `id` as a parameter.
+  * This function should then `route` the user back to the landing page.
+    * Hint: React Router is providing us with a `history` object which we can reference as `history`. This object contains values and methods that we can use to controll our router programmatically. Try to figure out the most efficient way to go back a page.
 
-**Detailed Instructions**
+<details>
+
+<summary> Detailed Instructions </summary>
+
+<br />
 
 This step will take place inside of `src/components/Details/Details.js`. Currently this view is broken, and will throw errors if we try to navigate to it. This is because our `mapStateToProps` function is returning all of our application state instead of the specific product we need.
 
@@ -638,9 +646,7 @@ Now that the component has access to the proper product object go ahead and upda
 
 Lastly we need to update what happens when the "Buy" button is clicked. Currently it just adds the item to cart in Redux, we want it to also send the user back to the page they were previously on. To do this we will need to use another prop from React Router - `history`. The `history` object represents the [`window.History`](https://developer.mozilla.org/en-US/docs/Web/API/History) api. Write a new function inside of `Details` named `addToCartAndRedirect`. This function will invoke `addToCart` passing `id` as a prop, then invoke `history.goBack` to send the user back to the previous page.
 
-<details>
-
-<summary><b>Code Solution</b></summary>
+</details>
 
 <details>
 
