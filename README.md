@@ -1045,7 +1045,6 @@ In this step, we will allow users to checkout from the cart view. We will create
 * Open `src/route.js`.
 * Import the `ThankYou` from `src/components/ThankYou/ThankYou.js`.
 * Create a new `route` where the `path` is `"/thank-you"` and the component is `ThankYou`.
-
 * Adjust the router to handle the `"/thank-you"` route
 
 <details>
