@@ -323,11 +323,26 @@ In this step, we will be setting up the `Landing` component to display data and 
 
 <br />
 
-We need to update `src/components/Landing/Landing.js` so that it actually displays some data! Before we make any changes, take a look at the provided `mapStateToProps` and `connect`. This component will take a `products` prop that is an array of of products that are either featured or on sale. We are also passing the `addToCart` action creator to allow for dispatching a new product to cart.
+So we have routes now but no way to get to those routes from the interface. Let's fix that by updating our `Landing` component. Open `src/components/Landing/Landing.js`. Before we make any changes, take a look at the provided `mapStateToProps` and `connect`. This component will take a `products` prop that is an array of of products that are either featured or on sale. We are also passing the `addToCart` action creator to allow for dispatching a new product to cart.
 
-Import `FeaturedProduct` from `src/components/Landing/FeaturedProduct/FeaturedProduct.js` and `Link` from `react-router-dom`. The `Link` component is React Router's replacement for an `<a>` tag, used to allow the library better control over routing. Near the bottom of render wrap the `h1` with the class `landing__full-shop-link` in a `Link`.  `Link` will take one prop - `to` set equal to the path we want it to navigate to `"/shop"`.
+Let's begin by importing `FeaturedProduct` from `src/components/Landing/FeaturedProduct/FeaturedProduct.js` and `Link` from `react-router-dom`. The `Link` component is React Router's replacement for an `<a>` tag which is used to allow the library better control over routing. 
 
-At the top of the `Landing` function create a new variable `products` set equal to the result of `map`ping over `featuredProducts` and returning the following JSX
+```js
+import { Link } from "react-router-dom";
+import FeaturedProduct from './FeaturedProduct/FeaturedProduct';
+```
+
+Near the bottom of render wrap the `h1` with the class `landing__full-shop-link` in a `Link`. `Link` will take one prop called `to` that should equal `"/shop"`.
+
+```js
+<Link className="landing__full-shop-link" to="/shop">
+  <h1 className="landing__full-shop-link">Take me to the full shop!</h1>
+</Link>
+```
+
+Our `h1` element on the `Landing` component will now route to the `Shop` component when clicked on.
+
+Now let's work on getting products to actually show up. At the top of the `Landing` function create a new variable `products`. This should equal the result of mapping over `featuredProducts` and returning the following JSX:
 
 ```jsx
 <FeaturedProduct
@@ -341,19 +356,142 @@ At the top of the `Landing` function create a new variable `products` set equal 
 />
 ```
 
-Render the `products` variable into the `div` with a class of `landing__products-wrapper`. We're now displaying a list of `FeaturedProduct` elements, but they aren't complete yet.
+When combining the JSX with the map function it'll look like:
 
-Open up `src/components/Landing/FeaturedProduct/FeaturedProduct.js` and import `Link` from React Router. Replace the commented sections with the appropriate props. Wrap the `h3` tag that holds the product name in a `Link` component with a `to` prop of <code>/details/${ name }</code>. Lastly use a ternary operator to only display the "Price Reduced!" `p` tag only if the product is on sale.
+```js
+const products = featuredProducts.map( (product) => (
+  <FeaturedProduct
+    addToCart={ () => addToCart( product.id ) }
+    description={ product.description }
+    key={ product.id }
+    logo={ product.logo }
+    name={ product.name }
+    onSale={ product.onSale }
+    price={ product.price }
+  />
+)); 
+```
+
+This will create an array of React components for us. More specifically an array of `FeaturedProduct` components. Since we used a map each featured product will have all the information related to that product. 
+
+We are now ready to render our products onto the landing page. Locate the `div` with the `className` of `landing__products-wrapper`. Inside that `div` render our `products`.
+
+```jsx
+<div className="landing__products-wrapper">
+  { products }
+</div>
+```
+
+The products should now be rendering on the page. However, the data is not being populated into the `FeaturedProduct` component. Let's take a look at the `FeaturedProduct.js` file and make sure it's using the props as the data source. Open up `src/components/Landing/FeaturedProduct/FeaturedProduct.js` and import `Link` from React Router. 
+
+```js
+import { Link } from "react-router-dom";
+```
+
+Now let's replace the commented our sections with the appropriate props. If you notice our props have been destructured using es6. We can tell this happening based on the following code:
+
+```js
+export default function FeaturedProduct( { addToCart, description, logo, name, onSale, price } ) {
+```
+
+Now we can reference each prop inside this function as `addToCart`, `description`, `logo`, `name`, `onSale`, and `price`. After updating all the commented out sections, our `return` should look like:
+
+```jsx
+return (
+  <div className="featured-product">
+    <div className="featured-product__logo-name-wrapper">
+      <img
+        alt={ `${ name } logo` }
+        className="featured-product__logo"
+        src={ logo }
+      />
+      <h3 className="featured-product__name">{ name }</h3>
+    </div>
+    <p className="featured-product__description">{ description }</p>
+    <div className="featured-product__buy-wrapper">
+      <p className="featured-product__price-reduced">Price Reduced!</p>
+      <button
+        className="featured-product__buy"
+        onClick={ addToCart }
+      >
+        ${ price }
+      </button>
+    </div>
+  </div>
+);
+```
+
+If we take a look at our live-server ( Live server not running? Run `npm start` when in the root of the project. ) we can see that our landing page is now displaying the correct data for each product. However, it looks like all the prices are reduced and we can't click on the product to go to the details page. Let's fix this. Wrap the `h3` tag that holds the product name in a `Link` component with a `to` prop that equals ``` `details/${name}` ```.
+
+```jsx
+return (
+  <div className="featured-product">
+    <div className="featured-product__logo-name-wrapper">
+      <img
+        alt={ `${ name } logo` }
+        className="featured-product__logo"
+        src={ logo }
+      />
+      <Link to={ `/details/${ name }` }>
+        <h3 className="featured-product__name">{ name }</h3>
+      </Link>
+    </div>
+    <p className="featured-product__description">{ description }</p>
+    <div className="featured-product__buy-wrapper">
+      <p className="featured-product__price-reduced">Price Reduced!</p>
+      <button
+        className="featured-product__buy"
+        onClick={ addToCart }
+      >
+        ${ price }
+      </button>
+    </div>
+  </div>
+);
+```
+
+Now each product will have a link to its own details page. All that's left now is fixing the "Price Reduced!" label to not display for every product. Let's use a ternary statement to only display that `p` element when `onSale` is truthy. Otherwise just use `null`.
+
+```jsx
+return (
+  <div className="featured-product">
+    <div className="featured-product__logo-name-wrapper">
+      <img
+        alt={ `${ name } logo` }
+        className="featured-product__logo"
+        src={ logo }
+      />
+      <Link to={ `/details/${ name }` }>
+        <h3 className="featured-product__name">{ name }</h3>
+      </Link>
+    </div>
+    <p className="featured-product__description">{ description }</p>
+    <div className="featured-product__buy-wrapper">
+      {
+        onSale
+        ?
+          <p className="featured-product__price-reduced">Price Reduced!</p>
+        :
+          null
+      }
+      <button
+        className="featured-product__buy"
+        onClick={ addToCart }
+      >
+        ${ price }
+      </button>
+    </div>
+  </div>
+);
+```
 
 </details>
 
-<details>
-
-<summary><b>Code Solution</b></summary>
+<br />
 
 <details>
 
-<summary><code>src/components/Landing/Landing.js</code></summary>
+<summary> <code> src/components/Landing/Landing.js </code> </summary>
 
 ```jsx
 import React from "react";
@@ -364,35 +502,37 @@ import "./Landing.css";
 
 import { addToCart } from "../../ducks/product";
 
-import FeaturedProduct from "./FeaturedProduct/FeaturedProduct";
+import FeaturedProduct from './FeaturedProduct/FeaturedProduct';
 
 export function Landing( { addToCart, featuredProducts } ) {
-	const products = featuredProducts.map( product => (
-		<FeaturedProduct
-			addToCart={ () => addToCart( product.id ) }
-			description={ product.description }
-			key={ product.id }
-			logo={ product.logo }
-			name={ product.name }
-			onSale={ product.onSale }
-			price={ product.price }
-		/>
-	) );
+  const products = featuredProducts.map( (product) => (
+    <FeaturedProduct
+      addToCart={ () => addToCart( product.id ) }
+      description={ product.description }
+      key={ product.id }
+      logo={ product.logo }
+      name={ product.name }
+      onSale={ product.onSale }
+      price={ product.price }
+    />
+  ));
 
-	return (
-		<main className="landing">
-			<h1>Featured Products</h1>
-			<div className="landing__products-wrapper">
-				{ products }
-			</div>
+  return (
+    <main className="landing">
+      <h1>Featured Products</h1>
+      <div className="landing__products-wrapper">
+        { products }
+      </div>
 
-			<Link to="/shop"><h1 className="landing__full-shop-link">Take me to the full shop!</h1></Link>
-		</main>
-	);
+      <Link className="landing__full-shop-link" to="/shop">
+        <h1 className="landing__full-shop-link">Take me to the full shop!</h1>
+      </Link>
+    </main>
+  );
 }
 
 function mapStateToProps( { products } ) {
-	return { featuredProducts: products.filter( product => product.featured || product.onSale ) };
+  return { featuredProducts: products.filter( product => product.featured || product.onSale ) };
 }
 
 export default connect( mapStateToProps, { addToCart } )( Landing );
@@ -402,7 +542,7 @@ export default connect( mapStateToProps, { addToCart } )( Landing );
 
 <details>
 
-<summary><code>src/components/Landing/FeaturedProduct/FeaturedProduct.js</code></summary>
+<summary> <code> src/components/Landing/FeaturedProduct/FeaturedProduct.js </code> </summary>
 
 ```jsx
 import React, { PropTypes } from "react";
@@ -411,37 +551,45 @@ import { Link } from "react-router-dom";
 import "./FeaturedProduct.css";
 
 export default function FeaturedProduct( { addToCart, description, logo, name, onSale, price } ) {
-	return (
-		<div className="featured-product">
-			<div className="featured-product__logo-name-wrapper">
-				<img
-					alt={ `${ name } logo` }
-					className="featured-product__logo"
-					src={ logo }
-				/>
-				<Link to={ `/details/${ name }` }><h3 className="featured-product__name">{ name }</h3></Link>
-			</div>
-			<p className="featured-product__description">{ description }</p>
-			<div className="featured-product__buy-wrapper">
-				{ onSale ? <p className="featured-product__price-reduced">Price Reduced!</p> : null }
-				<button
-					className="featured-product__buy"
-					onClick={ addToCart }
-				>
-					${ price }
-				</button>
-			</div>
-		</div>
-	);
+  return (
+    <div className="featured-product">
+      <div className="featured-product__logo-name-wrapper">
+        <img
+          alt={ `${ name } logo` }
+          className="featured-product__logo"
+          src={ logo }
+        />
+        <Link to={ `/details/${ name }` }>
+          <h3 className="featured-product__name">{ name }</h3>
+        </Link>
+      </div>
+      <p className="featured-product__description">{ description }</p>
+      <div className="featured-product__buy-wrapper">
+        {
+          onSale
+          ?
+            <p className="featured-product__price-reduced">Price Reduced!</p>
+          :
+            null
+        }
+        <button
+          className="featured-product__buy"
+          onClick={ addToCart }
+        >
+          ${ price }
+        </button>
+      </div>
+    </div>
+  );
 }
 
 FeaturedProduct.propTypes = {
-	  addToCart: PropTypes.func.isRequired
-	, description: PropTypes.string.isRequired
-	, logo: PropTypes.string.isRequired
-	, name: PropTypes.string.isRequired
-	, onSale: PropTypes.bool
-	, price: PropTypes.number.isRequired
+  addToCart: PropTypes.func.isRequired
+  , description: PropTypes.string.isRequired
+  , logo: PropTypes.string.isRequired
+  , name: PropTypes.string.isRequired
+  , onSale: PropTypes.bool
+  , price: PropTypes.number.isRequired
 };
 
 FeaturedProduct.defaultProps = { onSale: false };
@@ -449,9 +597,7 @@ FeaturedProduct.defaultProps = { onSale: false };
 
 </details>
 
-</details>
-
-### Step 3
+## Step 4
 
 **Summary**
 
