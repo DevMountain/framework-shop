@@ -898,7 +898,7 @@ In this step, we will set up the `Shop` view and its child components.
 * Open `src/components/Shop/ProductTile/ProductTile.js`.
 * Update the commented out sections to use `props`.
 * Wrap the `h3` element in a `Link` component:
-  * The `Link` component should have a `to` prop that equals ``` `details/${ name }` ```.
+  * The `Link` component should have a `to` prop that equals ``` { `details/${ name }` } ```.
 
 No detailed instructions for this step! If you get stuck try these before reading the solution:
 
