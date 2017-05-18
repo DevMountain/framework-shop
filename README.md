@@ -900,10 +900,15 @@ In this step, we will set up the `Shop` view and its child components.
 * Wrap the `h3` element in a `Link` component:
   * The `Link` component should have a `to` prop that equals ``` { `details/${ name }` } ```.
 
-No detailed instructions for this step! If you get stuck try these before reading the solution:
+<details>
 
-* This step is very similar to how we set up the `Landing` and `FeaturedProducts` components. Refer back to that!
-* Check the bottom of the `ProductTile` file to see the `propTypes` the component is expecting.
+<summary> Detailed Instructions </summary>
+
+No detailed instructions for this step! This step is very similar to how we set up the `Landing` and `FeaturedProducts` components. Refer back to that to help.
+
+</details>
+
+### Solution
 
 <details>
 
