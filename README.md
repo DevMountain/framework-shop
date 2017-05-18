@@ -1225,6 +1225,10 @@ export default connect( mapStateToProps, { checkout } )( Cart );
 
 </details>
 
+<br />
+
+<img src="https://github.com/DevMountain/framework-shop/blob/solution/readme-assets/5g.gif" />
+
 ## Contributions
 
 If you see a problem or a typo, please fork, make the necessary changes, and create a pull request so we can review your changes and merge them into the master repo and branch.
