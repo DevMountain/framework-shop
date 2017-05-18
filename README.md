@@ -904,6 +904,8 @@ In this step, we will set up the `Shop` view and its child components.
 
 <summary> Detailed Instructions </summary>
 
+<br />
+
 No detailed instructions for this step! This step is very similar to how we set up the `Landing` and `FeaturedProducts` components. Refer back to that to help.
 
 </details>
