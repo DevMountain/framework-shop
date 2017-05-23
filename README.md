@@ -54,7 +54,7 @@ To begin our project, we will be installing the required dependencies and config
 
 <br />
 
-To being, run `npm i react-router-dom --save` to install and save React Router to the `package.json`. Once that installs, create a new file in `src/` named `router.js`. This file will be where we create and configure our router. To being creating our router we'll need to import `React` from React ince we will be using JSX to declare our routes.
+To begin, run `npm i react-router-dom --save` to install and save React Router to the `package.json`. Once that installs, create a new file in `src/` named `router.js`. This file will be where we create and configure our router. To begin creating our router we'll need to import `React` from React ince we will be using JSX to declare our routes.
 
 ```js
 import React from 'react';
@@ -99,9 +99,9 @@ export default (
 )
 ```
 
-The following code means that when the path of our browser is at "/" on our website it will render the `Landing` component.
+The code snippet above means that when the path of our browser is at "/" on our website it will render the `Landing` component.
 
-What is `exact`? Exact allows to specific in React Router v4 that we only want that component to render when the path is exactly "/". If we had a development server running on port 3000, that would mean the landing component would only render at: `http://localhost:3000/`.
+What is `exact`? Exact allows us to specific in React Router v4 that we only want that component to render when the path is exactly "/". If we had a development server running on port 3000, that would mean the landing component would only render at: `http://localhost:3000/`.
 
 Let's add the reset of our views/routes. Don't worry about using `exact` on these routes. The remaining components to render are: `Cart`, `Details`, and `Shop`.
 
@@ -116,7 +116,7 @@ export default (
 )
 ```
 
-The following code translates to:
+The code snippet above translates to:
   * Say the server is hosted locally on port 3000.
   * A user goes to `http://localhost:3000/` in their browser -> The `Landing` component will render.
   * A user goes to `http://localhost:3000/shop` in their browser -> The `Shop` component will render.
@@ -386,7 +386,7 @@ The products should now be rendering on the page. However, the data is not being
 import { Link } from "react-router-dom";
 ```
 
-Now let's replace the commented our sections with the appropriate props. If you notice our props have been destructured using es6. We can tell this happening based on the following code:
+Now let's replace the commented our sections with the appropriate props. If you notice our props have been destructured using es6. We can tell this happening based on the code snippet below:
 
 ```js
 export default function FeaturedProduct( { addToCart, description, logo, name, onSale, price } ) {
