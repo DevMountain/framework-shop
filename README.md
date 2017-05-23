@@ -31,8 +31,6 @@ Redux has also been mostly wired up to the application. Take a quick look over t
 
 To begin our project, we will be installing the required dependencies and configuring the router.
 
-//  and rendering our application through the router.
-
 ### Instructions
 
 * Install React Router.
