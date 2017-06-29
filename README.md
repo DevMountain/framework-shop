@@ -15,7 +15,7 @@ In this project we will be building an ecommerce shop for the sale of JavaScript
 
 Several of these have child components that are used to display products in different ways.
 
-This project uses Redux, which is a different way of managing data in things like React. We'll be teaching how to use Redux later in the course. For the time being, we've provided all the necessary Redux code. At a basic level, Redux is getting pieces of data from a larger pool of data, and assigning it to the this.props of a given component.
+This project uses Redux, which is a different way of managing data in things like React. We'll be teaching how to use Redux later in the course. For the time being, we've provided all the necessary Redux code. In this project, Redux is getting pieces of data from a larger pool of data, and assigning it to the this.props of a given component.
 
 ## Setup
 
@@ -321,7 +321,7 @@ In this step, we will be setting up the `Landing` component to display data and 
 
 <br />
 
-So we have routes now but no way to get to those routes from the interface. Let's fix that by updating our `Landing` component. Open `src/components/Landing/Landing.js`. At the bottom of the code, you can see `mapStateToProps` and `connect`. That is Redux's way of giving this component data. This component will take a products prop that is an array of of products that are either featured or on sale.
+So we have routes now but no way to get to those routes from the interface. Let's fix that by updating our `Landing` component. Open `src/components/Landing/Landing.js`. At the bottom of the code, you can see `mapStateToProps` and `connect`. That is Redux's way of giving this component data. This component will take a products prop that is an array of products that are either featured or on sale.
 
 Let's begin by importing `FeaturedProduct` from `src/components/Landing/FeaturedProduct/FeaturedProduct.js` and `Link` from `react-router-dom` in `src/components/Landing/Landing.js`. The `Link` component is React Router's replacement for an `<a>` tag which is used to allow the library better control over routing. 
 
