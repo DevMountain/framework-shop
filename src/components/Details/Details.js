@@ -34,7 +34,7 @@ export function Details( { addToCart, history, products, match } ) {
 	);
 }
 
-function mapStateToProps( state, ownProps ) {
+function mapStateToProps( state ) {
 	return { products: state.products };
 }
 
