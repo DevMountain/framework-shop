@@ -6,6 +6,9 @@ import "./Details.css"
 import { addToCart } from "../../ducks/product";
 
 export function Details( { addToCart, history, products, match } ) {
+
+	const product = {}
+
 	const {
 		  description
 		, id
