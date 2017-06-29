@@ -5,7 +5,7 @@ import "./Details.css"
 
 import { addToCart } from "../../ducks/product";
 
-export function Details( { addToCart, history, product } ) {
+export function Details( { addToCart, history, products, match } ) {
 	const {
 		  description
 		, id
@@ -35,7 +35,7 @@ export function Details( { addToCart, history, product } ) {
 }
 
 function mapStateToProps( state, ownProps ) {
-	return { product: state.products.find( product => product.name === ownProps.match.params.name ) };
+	return { products: state.products };
 }
 
 export default connect( mapStateToProps, { addToCart } )( Details );

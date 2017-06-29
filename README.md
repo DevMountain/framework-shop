@@ -626,7 +626,7 @@ In this step, we will set up the `Details` component. We'll make use of route pa
 
 <br />
 
-Let's begin by opening `src/components/Details/Details.js`. 
+Let's begin by opening `src/components/Details/Details.js`. Currently this view is broken and will throw errors if we try to navigate to it. This is because Redux is giving us all the products, but as this is the Details page, we only want to display one specific product.
 
 Now that the component has access to the proper product object we can fill in the commented out sections with the correct data. Since I deconstructed the product object for you, we can look at that to determine what properties are on the `product` object. The product object will have a `description`, `id`, `logo`, `name`, and `price`. Let's add these values to the commented out sections.
 
