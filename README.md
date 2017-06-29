@@ -673,7 +673,7 @@ We have access to `products` from the `props` deconstruction. It is an array tha
 const product = products.find( product => product.name === match.params.name )
 ```
 
-Now that the component has access to the proper product object we can fill in the commented out sections with the correct data. Since I deconstructed the product object for you, we can look at that to determine what properties are on the `product` object. The product object will have a `description`, `id`, `logo`, `name`, and `price`. Let's add these values to the commented out sections.
+Now that the component has access to the proper product object we can fill in the commented out sections with the correct data. Since we deconstructed the product object for you, we can look at that to determine what properties are on the `product` object. The product object will have a `description`, `id`, `logo`, `name`, and `price`. Let's add these values to the commented out sections.
 
 ```jsx
 return (
