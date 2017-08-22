@@ -15,7 +15,7 @@ In this project we will be building an ecommerce shop for the sale of JavaScript
 
 Several of these have child components that are used to display products in different ways.
 
-Redux has also been mostly wired up to the application. Take a quick look over the reducer to get an idea of how the application data looks.
+This project uses Redux, which is a different way of managing data in things like React. We'll be teaching how to use Redux later in the course. For the time being, we've provided all the necessary Redux code. In this project, Redux is getting pieces of data from a larger pool of data, and assigning it to the this.props of a given component.
 
 ## Setup
 
@@ -321,7 +321,7 @@ In this step, we will be setting up the `Landing` component to display data and 
 
 <br />
 
-So we have routes now but no way to get to those routes from the interface. Let's fix that by updating our `Landing` component. Open `src/components/Landing/Landing.js`. Before we make any changes, take a look at the provided `mapStateToProps` and `connect`. This component will take a `products` prop that is an array of of products that are either featured or on sale. We are also passing the `addToCart` action creator to allow for dispatching a new product to a users cart.
+So we have routes now but no way to get to those routes from the interface. Let's fix that by updating our `Landing` component. Open `src/components/Landing/Landing.js`. At the bottom of the code, you can see `mapStateToProps` and `connect`. That is Redux's way of giving this component data. This component will take a products prop that is an array of products that are either featured or on sale.
 
 Let's begin by importing `FeaturedProduct` from `src/components/Landing/FeaturedProduct/FeaturedProduct.js` and `Link` from `react-router-dom` in `src/components/Landing/Landing.js`. The `Link` component is React Router's replacement for an `<a>` tag which is used to allow the library better control over routing. 
 
@@ -612,11 +612,11 @@ In this step, we will set up the `Details` component. We'll make use of route pa
 * Open `src/components/Details/Details.js`.
 * Import `Link` from `react-router-dom`.
 * Update the `h3` element to link to the `Shop` component.
-* Modify `mapStateToProps`:
-  * Using the `ownProps` parameter, return the single product object based on the route.
-    * Hint: Add a `console.log` in `mapStateToProps` that logs `ownProps`. Then go into the interface and click on a route from the landing page. If you open the browser's developer tools, you should see `ownProps` get logged. Look around this object for any useful property that can indicate what product we need to display information for.
-  * Once you have that property value from `ownProps` use it in combination with a `find` method to return a single object.
-    * Hint: Use `find` on `state.products`. Return the product whose `name` is equal to the `name` in our route.
+* `.find` the correct `product` from `products`
+  * Using `match`, return the single product based on the route.
+    * Hint: Add a `console.log` that logs `match`. Then go into the interface and click on a route from the landing page. If you open the browser's developer tools, you should see `match` get logged. Look around this object for any useful property that can indicate what product we need to display information for.
+  * Once you have that property value from `match` use it in combination with a `find` method to return a single object.
+    * Hint: Use `find` on `sproducts`. Return the product whose `name` is equal to the `name` in our route.
 * Use the `product` object that gets passed in as a paramter to the `Details` function to update all the commented out sections to the correct property value.
   * Hint: Add a `console.log` just above the `const` in the `Details` function of the value of `product`. Then go into the interface and click on a route from the landing page. If you open the browser's developer tools, you should see a log that shows an object. If you don't see an object, your `.find` is working incorrectly in `mapStateToProps`.
 * Create an `addToCartAndRedirect` function above the `return` of the `Details` function:
@@ -631,11 +631,11 @@ In this step, we will set up the `Details` component. We'll make use of route pa
 
 <br />
 
-Let's begin by opening `src/components/Details/Details.js`. Currently this view is broken and will throw errors if we try to navigate to it. This is because our `mapStateToProps` function is returning all of our application state instead of the specific product we need.
+Let's begin by opening `src/components/Details/Details.js`. Currently this view is broken and will throw errors if we try to navigate to it. This is because Redux is giving us all the products, but as this is the Details page, we only want to display one specific product.
 
-To fix this we'll need to get access to our route parameters in `mapStateToProps`. Luckily connect passes a second parameter to `mapStateToProps`. This second parameter is an object that contains all the other connected `props` the component has. When diving into this object we'll see it has a `match` property that gets added from `react-router`. This is also equal to an object. If we take a look at that object we'll see it has a property called `params` that is also equal to an object. This `params` object contains all the params in our URL. 
+To fix this we'll need to get access to our route parameters. Our component is passed a `match` property through `props` by `react-router`. This is also equal to an object. If we take a look at that object we'll see it has a property called `params` that is also equal to an object. This `params` object contains all the params in our URL.
 
-When we created our route for details we specified we wanted a parameter called `name`. Because of this if we take a look at `ownProps.match.params` we'll see a property called `name` that equals a string. Since our landing page has three products this name will come in three different forms. Not including all the other things that are on the `ownProps` object, you will see `ownProps` come in these forms:
+When we created our route for details we specified we wanted a parameter called `name`. Because of this if we take a look at `match.params` (we deconstructed `props` in the component declaration) we'll see a property called `name` that equals a string. Since our landing page has three products this name will come in three different forms. You will see `match` come in these forms:
 
 ```js
 // Backbone
@@ -664,23 +664,16 @@ ownProps = {
 }
 ``` 
 
-Knowing this object structure we can combine the value of `ownProps.match.params.name` with a `.find` to get the exact product object we need for our component. In the `mapStateToProps` function let's modify the original return of just `state` to return a new object.
+Knowing this object structure we can combine the value of `match.params.name` with a `.find` to get the exact product object we need for our component. Let's write a function that will take the name we get from `match.params` and search through the products array to find the specific product we want to display.
+
+
+We have access to `products` from the `props` deconstruction. It is an array that contains all the `product` objects. Let's use a `.find` on that array to return the object whose `name` property equals the name property on `match.params.name`.
 
 ```js
-function mapStateToProps( state, ownProps ) {
-  return { };
-}
+const product = products.find( product => product.name === match.params.name )
 ```
 
-On `state` there is a property called `products` that is an array that contains all the `product` objects. Let's use a `.find` on that array to return the object whose `name` property equals the name property on `ownProps.match.params.name`.
-
-```js
-function mapStateToProps( state, ownProps ) {
-  return { product: state.products.find( product => product.name === ownProps.match.params.name ) };
-}
-```
-
-Now that the component has access to the proper product object we can fill in the commented out sections with the correct data. Since I deconstructed the product object for you, we can look at that to determine what properties are on the `product` object. The product object will have a `description`, `id`, `logo`, `name`, and `price`. Let's add these values to the commented out sections.
+Now that the component has access to the proper product object we can fill in the commented out sections with the correct data. Since we deconstructed the product object for you, we can look at that to determine what properties are on the `product` object. The product object will have a `description`, `id`, `logo`, `name`, and `price`. Let's add these values to the commented out sections.
 
 ```jsx
 return (
@@ -750,7 +743,10 @@ import "./Details.css"
 
 import { addToCart } from "../../ducks/product";
 
-export function Details( { addToCart, history, product } ) {
+export function Details( { addToCart, history, products, match } ) {
+
+  const product = products.find( product => product.name === match.params.name )
+
   const {
     description,
     id,
@@ -763,7 +759,6 @@ export function Details( { addToCart, history, product } ) {
     addToCart( id );
     history.goBack();
   }
-
   return (
     <div className="details">
       <Link to="/shop">
@@ -786,8 +781,8 @@ export function Details( { addToCart, history, product } ) {
   );
 }
 
-function mapStateToProps( state, ownProps ) {
-  return { product: state.products.find( product => product.name === ownProps.match.params.name ) };
+function mapStateToProps( state ) {
+  return { products: state.products };
 }
 
 export default connect( mapStateToProps, { addToCart } )( Details );

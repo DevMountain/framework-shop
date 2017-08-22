@@ -5,7 +5,10 @@ import "./Details.css"
 
 import { addToCart } from "../../ducks/product";
 
-export function Details( { addToCart, history, product } ) {
+export function Details( { addToCart, history, products, match } ) {
+
+	const product = {}
+
 	const {
 		  description
 		, id
@@ -34,8 +37,8 @@ export function Details( { addToCart, history, product } ) {
 	);
 }
 
-function mapStateToProps( state, ownProps ) {
-	return state
+function mapStateToProps( state ) {
+	return { products: state.products };
 }
 
 export default connect( mapStateToProps, { addToCart } )( Details );
