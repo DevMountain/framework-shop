@@ -103,7 +103,7 @@ The code snippet above means that when the path of our browser is at "/" on our 
 
 What is `exact`? Exact allows us to specific in React Router v4 that we only want that component to render when the path is exactly "/". If we had a development server running on port 3000, that would mean the landing component would only render at: `http://localhost:3000/`.
 
-Let's add the reset of our views/routes. Don't worry about using `exact` on these routes. The remaining components to render are: `Cart`, `Details`, and `Shop`.
+Let's add the rest of our views/routes. Don't worry about using `exact` on these routes. The remaining components to render are: `Cart`, `Details`, and `Shop`.
 
 ```js
 export default (
@@ -309,7 +309,7 @@ In this step, we will be setting up the `Landing` component to display data and 
 * Update all the comments with the appropriate prop.
 * Modify the `h3` element with the `className` of `featured-produce__name`:
   * This element should be wrapped in a `Link` element.
-  * The `Link` element should have a `to` prop that equals ``` { `details/${name}` } ```.
+  * The `Link` element should have a `to` prop that equals ``` { `/details/${name}` } ```.
 * Modify the `p` element with the `className` of `featured-product__price-reduced`:
   * This element should be inside a `ternary statement`.
   * If `onSale` is truthy, render the `p` element.
@@ -419,7 +419,7 @@ return (
 );
 ```
 
-If we take a look at our live-server ( Live server not running? Run `npm start` when in the root of the project. ) we can see that our landing page is now displaying the correct data for each product. However, it looks like all the prices are reduced and we can't click on the product to go to the details page. Let's fix this. Wrap the `h3` tag that holds the product name in a `Link` component with a `to` prop that equals ``` { `details/${name}` } ```.
+If we take a look at our live-server ( Live server not running? Run `npm start` when in the root of the project. ) we can see that our landing page is now displaying the correct data for each product. However, it looks like all the prices are reduced and we can't click on the product to go to the details page. Let's fix this. Wrap the `h3` tag that holds the product name in a `Link` component with a `to` prop that equals ``` { `/details/${name}` } ```.
 
 ```jsx
 return (
@@ -891,7 +891,7 @@ In this step, we will set up the `Shop` view and its child components.
 * Open `src/components/Shop/ProductTile/ProductTile.js`.
 * Update the commented out sections to use `props`.
 * Wrap the `h3` element in a `Link` component:
-  * The `Link` component should have a `to` prop that equals ``` { `details/${ name }` } ```.
+  * The `Link` component should have a `to` prop that equals ``` { `/details/${ name }` } ```.
 
 <details>
 
@@ -962,7 +962,7 @@ export default function ProductTile( { addToCart, logo, name, price } ) {
   return (
     <div className="product-tile">
       <section className="product-tile__info">
-        <Link to={ `details/${ name }` }>
+        <Link to={ `/details/${ name }` }>
           <h3> { name } </h3>
         </Link>
         <button
