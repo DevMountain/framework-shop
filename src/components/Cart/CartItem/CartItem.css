@@ -15,4 +15,5 @@
 .cart-item__logo {
 	height: 50px;
 	margin-right: 16px;
+	max-width: 125px;
 }
