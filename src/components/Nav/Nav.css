@@ -28,3 +28,7 @@
 	margin-right: 12px;
 	width: auto;
 }
+
+p.nav__cart {
+	margin-left: 15px;
+}
